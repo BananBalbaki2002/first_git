@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:tasko/app/models/mod_tasks.dart';
+import 'package:tasko/my_app/models/mod_tasks.dart';
 import '../constants.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tasko/app/reusable/text_field.dart';
-import 'package:tasko/app/models/mod_tasks.dart';
-import 'package:tasko/app/widgets/card_task.dart';
+import 'package:tasko/my_app/reusable/text_field.dart';
+import 'package:tasko/my_app/models/mod_tasks.dart';
+import 'package:tasko/my_app/screens/card_task.dart';
+
 import '../constants.dart';
 
 
@@ -29,11 +30,11 @@ class Task extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 9.0),
                 child: Column(children: [
                   Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(Icons.menu, size: 27, color: Colors.white),
+                        icon: Icon(Icons.arrow_back_outlined, size: 27, color: Colors.white),
                       ),
                       Text(
                         'Tasks',
@@ -42,7 +43,7 @@ class Task extends StatelessWidget {
                             fontSize: 30,
                             fontWeight: FontWeight.bold),
                       ),
-                      Spacer(),
+                      //Spacer(),
                       IconButton(
                         icon: Icon(Icons.notifications_outlined,
                             size: 28, color: Colors.white),
@@ -54,8 +55,10 @@ class Task extends StatelessWidget {
                     height: size.width*0.07,
                   ),
 
-                  ReTextField(hintText: 'Search',isPassword: false,borderRadius: 40,controller:searchController ,prefixIcon: Icon(Icons.search),)
-
+                  //ReTextField(enableBorder:false,hintText: 'Search',isPassword: false,borderRadius: 40,controller:searchController ,prefixIcon: Icon(Icons.search),)
+Container(
+    margin: EdgeInsets.symmetric(horizontal: 10),
+    child:ReTextField(prefixIcon: Icon(Icons.search),controller: searchController, isPassword: false, enableBorder: false,borderRadius: 40,hintText: 'Search',))
 
                   ,SizedBox(
                     height: size.width*0.06,
