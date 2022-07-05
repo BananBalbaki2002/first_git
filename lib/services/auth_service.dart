@@ -59,7 +59,7 @@ static var token;
 Map<String,dynamic> json=jsonDecode(response.body);
     print(await GetStorage().read('token'));
 await GetStorage().remove('token');
-print(json['message']);
+
 return json['message'];
 
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
-import 'package:tasko/my_app/reusable/text_field.dart';
+import 'package:tasko/components/custom_field.dart';
 import 'package:tasko/my_app/models/model_user.dart';
 
 import '../constants.dart';
@@ -46,11 +46,15 @@ class Users extends StatelessWidget {
 
                   Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
-                      child:ReTextField(prefixIcon: Icon(Icons.search),
-                        controller: searchController,
-                        isPassword: false, enableBorder: false,
-                        borderRadius: 40,
-                        hintText: 'Search',))
+                      child:
+                      CustomField(
+height: size.height*0.065,
+                          prefixIcon: Icon(Icons.search),
+                          borderRadius: 40,
+                          allBorder: false,  hintText: 'Search', isPassword: false,
+                          controller: searchController),
+
+                  )
 
                   ,SizedBox(
                     height: size.width*0.07,

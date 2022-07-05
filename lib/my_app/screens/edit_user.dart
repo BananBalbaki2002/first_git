@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tasko/components/custom_field.dart';
 import 'package:tasko/controllers/user_controller.dart';
-import 'package:tasko/my_app/reusable/text_field.dart';
+
 
 import 'add_user.dart';
 
@@ -8,10 +9,18 @@ import 'add_user.dart';
 
 class EditUser extends StatefulWidget {
 
-  List<int> itemsList = [2,3];
-  List<int> teamIdList = [1];
-  String? choositem;
-  UserController userController=UserController();
+
+  List<int> RoleIdList = [2,3,4];
+  List<int> teamIdList = [1,2,3];
+  String? choosRoleId;
+  String? choosteamId;
+
+  TextEditingController fnameController = TextEditingController();
+  TextEditingController lnameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController idController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   State<EditUser> createState() => _EditUserState();
 }
@@ -34,7 +43,7 @@ class _EditUserState extends State<EditUser> {
                         radius: 15,
                         backgroundColor: Colors.white12,
                         child: Icon(Icons.arrow_back_ios_outlined,
-                          color: Colors.white, size: 20,)),
+                          color: Colors.white,size: 20,)),
 
                     Text(
                       'EditUser',
@@ -66,110 +75,77 @@ class _EditUserState extends State<EditUser> {
                             height: 10,
                           ),
                           //---------fname-------------------------------------
-                          InputField(
-                            title: 'First_Name',
-                            widget: TextFormField(
-                              autofocus: false,
-                              controller: widget.userController.lnameController,
-                              // keyboardType: keyboardType,
-                              decoration: InputDecoration(
-                                hintText: 'First_Name',
+                          InputField(widget: CustomField(
+                            height: MediaQuery.of(context).size.height * 0.07,
+                            allBorder:true,hintText:'First_Name',
+                            hintColor: Colors.grey[700],
+                            isPassword: false,
+                            controller: widget.fnameController,colorField: Colors.grey[100],)
 
-                                hintStyle: TextStyle(
-                                  color: Colors.grey[500],
-                                ),
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
 
-                          //---------fname-------------------------------------
-                          InputField(
-                            title: 'Last_Name',
-                            widget: TextFormField(
-                              autofocus: false,
-                              controller: widget.userController.lnameController,
-                              // keyboardType: keyboardType,
-                              decoration: InputDecoration(
-                                hintText: 'Last_Name',
+                              , title: 'First_Name'),
 
-                                hintStyle: TextStyle(
-                                  color: Colors.grey[500],
-                                ),
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                          //-------password----------
-                          InputField(
-                            title: 'Password',
-                            widget: TextFormField(
-                              autofocus: false,
-                              controller: widget.userController
-                                  .passwordController,
-                              // keyboardType: keyboardType,
-                              decoration: InputDecoration(
-                                hintText: 'password',
+                          InputField(widget: CustomField(height: MediaQuery.of(context).size.height * 0.07,
+                            allBorder:true,hintText:'Last_Name', isPassword: false,
+                            controller: widget.lnameController,
+                            hintColor: Colors.grey[700],
+                            colorField: Colors.grey[100],)
+                              , title: 'Last_Name'),
 
-                                hintStyle: TextStyle(
-                                  color: Colors.grey[500],
-                                ),
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                          //-----email---------
-                          InputField(
-                            title: 'Email',
-                            widget: TextFormField(
-                              autofocus: false,
-                              controller: widget.userController.emailController,
-                              // keyboardType: keyboardType,
-                              decoration: InputDecoration(
-                                hintText: 'Email',
 
-                                hintStyle: TextStyle(
-                                  color: Colors.grey[500],
-                                ),
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                          //-----id---------
-                          InputField(
-                            title: 'ID',
-                            widget: TextFormField(
-                              autofocus: false,
-                              controller: widget.userController.idController,
-                              // keyboardType: keyboardType,
-                              decoration: InputDecoration(
-                                hintText: 'Employee_identical',
+                          InputField(widget: CustomField(keyboard:TextInputType.emailAddress,
+                            height: MediaQuery.of(context).size.height * 0.07, allBorder:true,
+                            hintText:'Email', isPassword: false,
+                            hintColor: Colors.grey[700],
+                            controller: widget.emailController,colorField: Colors.grey[100],)
+                              , title: 'Email'),
 
-                                hintStyle: TextStyle(
-                                  color: Colors.grey[500],
-                                ),
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
+                          InputField(widget: CustomField(keyboard:TextInputType.visiblePassword,
+                            height: MediaQuery.of(context).size.height * 0.07,
+                            allBorder:true,hintText:'Password', isPassword: true,
+                            controller: widget.passwordController,
+                            hintColor: Colors.grey[700],
+                            colorField: Colors.grey[100],)
+                              , title: 'Password'),
+
+
+                          InputField(widget: CustomField(keyboard:TextInputType.number,
+                            height: MediaQuery.of(context).size.height * 0.07, allBorder:true,
+                            hintText:'Employee_Identical', isPassword: false,
+                            hintColor: Colors.grey[700],
+                            controller: widget.idController,colorField: Colors.grey[100],)
+                              , title: 'Employee_Identical'),
+
 
 
                           InputField(
                             title: 'Role_Id',
-                            widget: DropdownButtonHideUnderline(
-                              child: DropdownButton(
-                                hint: Text('select role '),
-                                items: widget.itemsList.map(buildMenuItem)
-                                    .toList(),
-                                value: widget.choositem,
-                                icon: Icon(Icons.keyboard_arrow_down),
-                                iconSize: 30,
-                                isExpanded: true,
-                                onChanged: (value) =>
+                            widget:  Container(
+                              margin: EdgeInsets.only(top: 7),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 8,
+                              ),
+                              height: MediaQuery.of(context).size.height * 0.07,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[100],
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(color: Colors.black12, width: 1.5),
+                              ),
+                              child:DropdownButtonHideUnderline(
+                                child: DropdownButton(
+                                  hint:Text( 'select role_Id '),
 
-                                    setState(() {
-                                      widget.choositem = value as String?;
-                                    }),
+                                  items: widget.RoleIdList.map(buildMenuItem).toList(),
+                                  value:widget.choosRoleId ,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 30,
+                                  isExpanded: true,
+                                  onChanged: (value)=>
+
+                                      setState(() {
+                                        widget.choosRoleId=value as String?;
+                                      }),
+                                ),
                               ),
                             ),
                           ),
@@ -179,23 +155,38 @@ class _EditUserState extends State<EditUser> {
 
                           InputField(
                             title: 'Team_Id',
-                            widget: DropdownButtonHideUnderline(
-                              child: DropdownButton(
-                                hint: Text('select Team_id '),
-                                items: widget.teamIdList.map(buildMenuItem)
-                                    .toList(),
-                                value: widget.choositem,
-                                icon: Icon(Icons.keyboard_arrow_down),
-                                iconSize: 30,
-                                isExpanded: true,
-                                onChanged: (value) =>
+                            widget:
 
-                                    setState(() {
-                                      widget.choositem = value as String?;
-                                    }),
+                            Container(
+                              margin: EdgeInsets.only(top: 7),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 8,
+                              ),
+                              height: MediaQuery.of(context).size.height * 0.07,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[100],
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(color: Colors.black12, width: 1.5),
+                              ),
+                              child:DropdownButtonHideUnderline(
+                                child: DropdownButton(
+                                  hint:Text( 'select Team_id '),
+                                  items: widget.teamIdList.map(buildMenuItem).toList(),
+                                  value:widget.choosteamId ,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 30,
+                                  isExpanded: true,
+                                  onChanged: (value)=>
+
+                                      setState(() {
+                                        widget.choosteamId=value as String?;
+                                      }),
+                                ),
                               ),
                             ),
                           ),
+
+
 
 
                         ]
@@ -208,25 +199,25 @@ class _EditUserState extends State<EditUser> {
               ),
 
 
+
+
+
             ]),
 
       ),
 
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.indigo, onPressed: () {
+      floatingActionButton: FloatingActionButton(backgroundColor:Colors.indigo,onPressed: (){
 
 
-      }, child: Icon(Icons.check_outlined),),
+      },child: Icon(Icons.check_outlined),) ,
 
     );
   }
-
 }
 
-  DropdownMenuItem<String> buildMenuItem(int item) =>
-      DropdownMenuItem(
-          value: item.toString(),
-          child: Text(item.toString())
-      );
+DropdownMenuItem<String> buildMenuItem(int item) => DropdownMenuItem(
+    value: item.toString(),
+    child: Text(item.toString())
+);
 
 

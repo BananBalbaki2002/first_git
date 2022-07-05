@@ -12,8 +12,7 @@ class UserController {
   TextEditingController emailController = TextEditingController();
   TextEditingController idController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController roleIdController = TextEditingController();
-  TextEditingController teamIdController = TextEditingController();
+
 
   onClickAddUser() async {
     User user = User(
@@ -22,8 +21,8 @@ class UserController {
         email: emailController.text,
         employee_identical: idController.text,
         password: passwordController.text,
-        role_id: roleIdController.text,
-        team_id: teamIdController.text);
+        role_id: '',
+        team_id: '');
 
 
     await UserService.addUser(user);

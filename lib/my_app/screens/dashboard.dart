@@ -13,13 +13,11 @@ class Dashboard extends StatelessWidget {
     'Calender',
     'Metting'
   ];
-
+  LoginController loginController = LoginController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return ChangeNotifierProvider(
-        create: (context) => LoginController(),
-        child: Scaffold(
+    return  Scaffold(
             backgroundColor: Color(0xffFFD39A),
             body: SafeArea(
               child: Padding(
@@ -29,9 +27,8 @@ class Dashboard extends StatelessWidget {
                   children: [
                     Container(
                         margin: EdgeInsets.only(top: 10),
-                        child: Consumer<LoginController>(
-                            builder: (context, loginController, child) {
-                          return Row(
+                        child:
+                            Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(),
@@ -54,21 +51,14 @@ class Dashboard extends StatelessWidget {
                                       EasyLoading.show(status: 'Loading....');
                                       await loginController.onClickLogout();
 
-                                      //if (loginController.message != null)
-                                      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(loginController.message)));
-                                      Navigator.pushReplacementNamed(
+  Navigator.pushReplacementNamed(
                                           context, '/login');
-                                      EasyLoading.showSuccess(loginController.message);
-                                      //  print('yes every things');
-                                      //} else {
-                                      //EasyLoading.showError('error page');
-                                      //print('there are errors ');
-                                      //}
+                                      EasyLoading.showSuccess('successfully logged out');
+
                                     }),
                                   )),
                             ],
-                          );
-                        })),
+                          )),
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.only(
@@ -99,7 +89,7 @@ class Dashboard extends StatelessWidget {
                   ],
                 ),
               ),
-            )));
+            ));
   }
 
   Container cardArea(int index) {
