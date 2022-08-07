@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:tasko/components/custom_button.dart';
 import 'package:tasko/components/custom_field.dart';
 import 'package:tasko/controllers/login_controller.dart';
+import 'package:tasko/controllers/task_controller.dart';
+import 'package:tasko/controllers/user_controller.dart';
 import 'package:tasko/my_models/user_model.dart';
 import 'package:tasko/services/auth_service.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -12,6 +15,9 @@ import 'package:provider/provider.dart';
 class Login extends StatelessWidget {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   LoginController loginController = LoginController();
+  TaskController  taskController=TaskController();
+UserController  userController=UserController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -82,7 +88,9 @@ class Login extends StatelessWidget {
                         CustomButton(
                           height: 63,
 
-                          width: size.width*0.9, buttonName: 'LOGIN', onTap:
+                          width: size.width*0.9, buttonName: 'LOGIN',
+
+                          onTap:
                               () async {
                             EasyLoading.show(status: 'Loading....');
 
@@ -90,8 +98,27 @@ class Login extends StatelessWidget {
 
                             if (loginController.modelUser != null) {
                               EasyLoading.showSuccess('sing up is done.');
-                              Navigator.pushReplacementNamed(
-                                  context, '/Dashboard');
+
+
+
+                             await  GetStorage().write('role_id',loginController.modelUser!.role_id);
+                              int role_id=await GetStorage().read('role_id');
+                              if( role_id == 1){
+                                print('1');
+                                Navigator.pushReplacementNamed(
+                                    context, '/Dashboard');
+                              }
+                              else if(role_id == 2 ){
+                                print('2');
+                                Navigator.pushReplacementNamed(
+                                    context, '/DashboardTeamLeader');
+
+                              }
+
+
+
+
+
                               print('yes every things');
                             } else {
                               EasyLoading.showError(

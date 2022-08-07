@@ -24,7 +24,8 @@ final  Function()  onTap;
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return GestureDetector(
+    return
+      GestureDetector(
       onTap: onTap,
       child: Container(
           width: width,

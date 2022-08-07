@@ -28,7 +28,7 @@ class Attachement_Screen extends StatelessWidget {
         body: Stack(children: [
           Container(
 //height: size.height * 0.3,
-            color: kblue,
+            color: Colors.blue,
           ),
           SafeArea(
               child: Padding(

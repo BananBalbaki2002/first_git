@@ -28,14 +28,14 @@ static var token;
   message=json['message:'];
   print(json['message:']);
 
-//print(json['the user:']['token']);
+print(json['token']);
 //print('the user');
 //print(json['the user:']['user']);
 
-  await GetStorage().write('token', json['the user:']['token']);
+  await GetStorage().write('token', json['token']);
 
   print(await GetStorage().read('token'));
-      return User.fromJson(json['the user:']['user']);
+      return User.fromJson(json['user']);
 //return true;
     } else if (response.statusCode == 422 || response.statusCode == 402) {
 
@@ -52,13 +52,20 @@ static var token;
     var response = await http.get(
   Uri.parse(ServerConfig.domainName +ServerConfig.logout),
   headers: {
-    'auth': 'Bearer  ${GetStorage().read('token')}',
-    'Accept': 'application/json',
+    //-------------------------------------------------
+
+    'Authorization': 'Bearer ${GetStorage().read('token')}',
+// HttpHeaders.authorizationHeader: 'Bearer ${GetStorage().read('token')}',
+
+  //-----------------------------------------------------------------------
+    'Accept':'application/json'
 
   },);
 Map<String,dynamic> json=jsonDecode(response.body);
     print(await GetStorage().read('token'));
 await GetStorage().remove('token');
+print('the message is ');
+print(json['message']);
 
 return json['message'];
 

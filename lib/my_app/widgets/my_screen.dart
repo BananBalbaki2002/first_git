@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:tasko/my_app/screens/task_details.dart';
+import 'package:tasko/my_app/admin_screens/task_details.dart';
 
 import '../constants.dart';
-import '../screens/card_subtask.dart';
+import '../../components/card_subtask.dart';
 
 
 class MyScreen extends StatefulWidget {

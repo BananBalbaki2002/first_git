@@ -2,39 +2,58 @@
 
 
 
-class TaskModel{
+
+
+import 'dart:convert';
+
+import 'package:tasko/my_app/admin_screens/sub_task.dart';
+
+List<Task> taskFromJson(String str) =>
+    List<Task>.from(jsonDecode(str).map((x) => Task.fromJson(x)));
+
+
+
+
+
+
+class Task{
 
   /*
-        "title": "hospital management system",
-        "description": "this system will help doctors and patients",
-        "start_date": "2022-08-01",
-        "end_date": "2022-10-15",
-        "status_id": "2",
-        "team_id": "2",
-        "id": 6
+        "id": 3,
+            "title": "Charity management system",
+            "description": "this system will help people and financiers",
+            "start_date": "2022-08-01",
+            "end_date": "2022-10-15",
+            "status_id": 1,
+            "team_id": 2,
+            "created_at": "2022-07-02T11:00:36.000000Z",
+            "updated_at": "2022-07-14T22:23:01.000000Z",
    */
 
   String? title;
   String? description;
   String? start_date;
   String? end_date;
-  String? status_id;
-  String? team_id;
-  String? id ;
+  var status_id;
+  var team_id;
+  var id ;
 
+//var subtasks;
 
-  TaskModel({
+  Task({
+
    this.title,
    this.description,
    this.start_date,
     this.end_date,
     this.status_id,
     this.team_id,
-    this.id
+    this.id,
+
 
 });
-  factory  TaskModel.fromJson(Map<String,dynamic> json)=>
-TaskModel(
+  factory  Task.fromJson(Map<String,dynamic> json)=>
+Task(
 title: json['title'],
   description: json['description'],
   start_date: json['start_date'],

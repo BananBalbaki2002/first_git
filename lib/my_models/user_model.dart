@@ -2,19 +2,41 @@
 
 
 import 'package:flutter/cupertino.dart';
-/*
+import 'dart:convert';
+//------------------------------------------------------------
+// To parse this JSON data, do
+//
+//  final user = userFromJson(jsonString);
 
-"first_name": "samer",
-        "last_name": "Khdeelr",
-        "email": "samerkh4@gmail.com",
-        "employee_identical": "430219",
-        "password": "$2y$10$f1I7rX1H8bGhzc1DKaKdQ.jZ1GMF/rCBHZpnBhKLAZi/Bo5oOcuiq",
-        "role_id": "3",
-        "team_id": "1",
-        "updated_at": "2022-07-03T20:26:03.000000Z",
-        "created_at": "2022-07-03T20:26:03.000000Z",
-        "id": 13
- */
+Users usersFromJson(String str) =>  Users.fromJson(json.decode(str));
+
+List<User> userFromJson(String str) =>
+    List<User>.from(jsonDecode(str).map((x) => User.fromJson(x)));
+
+
+class Users {
+  List<User> users;
+
+  Users({
+    required this.users,
+  });
+// decode for data
+  // key:value
+  //List<User>.from .....fun..... convert to map for every item
+  factory Users.fromJson(Map<String, dynamic> json) => Users(
+    users: List<User>.from(json["users"].map((x) => User.fromJson(x))),
+
+  );
+
+
+}
+
+
+
+
+
+//----------------------------------------------
+
 
 class User{
   String? first_name;
@@ -23,7 +45,7 @@ class User{
   String? employee_identical;
   String? password;
   var role_id;
-  String? team_id;
+  var  team_id;
 var id;
 
  User({
@@ -41,7 +63,7 @@ var id;
 factory  User.fromJson(Map<String,dynamic> json)=>
     User(
       first_name: json['first_name'],
-        last_name: json['first_name'],
+        last_name: json['last_name'],
         email:json['email'],
       employee_identical:json['employee_identical'],
      password:json['password'],
@@ -52,8 +74,8 @@ factory  User.fromJson(Map<String,dynamic> json)=>
 
 
 
+  }
 
 
 
 
-}

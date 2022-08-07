@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:tasko/components/custom_button.dart';
 
 class SubTask extends StatelessWidget {
   const SubTask({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class SubTask extends StatelessWidget {
                 height: 350,
                 width: 200,
                 decoration: BoxDecoration(
-                    color: Colors.indigo,
+                    color: Colors.blue,
                     borderRadius:
                         BorderRadius.only(bottomLeft: Radius.circular(800))),
               ),
@@ -30,7 +31,7 @@ class SubTask extends StatelessWidget {
                 height: 350,
                 width: 200,
                 decoration: BoxDecoration(
-                    color: Colors.indigo,
+                    color: Colors.blue,
                     borderRadius:
                         BorderRadius.only(topRight: Radius.circular(800))),
               ),
@@ -64,26 +65,21 @@ class SubTask extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CircleAvatar(
-                              radius: 18,
-                              backgroundColor: Colors.grey[100],
-                              child: Icon(Icons.arrow_back_ios_outlined,
-                                  color: Colors.black, size: 20),
-                            ),
-                            Text('SubTask Details',
-                                style: TextStyle(
-                                  fontSize: 23,
 
-                                )),
-                            CircleAvatar(
-                              radius: 18,
-                              backgroundColor: Colors.grey[100],
-                              child: Icon(
-                                Icons.more_horiz_outlined,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                            ),
+
+                            Row(children: [
+                              Icon(Icons.arrow_back),
+                              SizedBox(width: 15,),
+                              Text('Details',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
+
+                            ],),
+
+                            CustomButton(height: 40,width: 120, buttonName: 'In Progress',buttonColor:Colors.blue,fontSize: 15, onTap: () {  })
+
+
+
+
+
                           ],
                         ),
                       ),
@@ -206,7 +202,7 @@ class SubTask extends StatelessWidget {
                           child: ListView(
                             children: [
                               Text(
-                                'this is discription about task this is discription about task this is discription about task this is discription about task this is discription about task this is discription about task this is discription about task this is discription about task',
+                                'this is discreption about task this is discreption about task this is discreption about task this is discription about task this is discription about task this is discription about task this is discription about task this is discription about task',
                                 maxLines: 6,
                                 style: TextStyle(
                                   fontSize: 15,
@@ -260,38 +256,25 @@ class SubTask extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 28,
-                      ),
-
-
-
-Row(
-  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  children: [
-  Container(
-      padding: EdgeInsets.all(10),
-      width: 90,
-      decoration: BoxDecoration(
-          color: Colors.teal,
-          borderRadius: BorderRadius.circular(4)),
-      child: Text(
-        'ToDo ',
-        style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-        textAlign: TextAlign.center,
-      )),
-  Text('80%',style: TextStyle(color:Colors.teal,fontSize: 15,fontWeight: FontWeight.bold),)
-
-],),
 
 
 
 
 
 
-                      SizedBox(
-                        height: 13,
-                      ),
+
+
+
+
+
+
+
+
+
+
+
+
+                  /*
                       LinearPercentIndicator(
                         animation: true,
 
@@ -302,6 +285,11 @@ Row(
                         //width: 70,
                         backgroundColor: Colors.grey[300],
                       ),
+
+
+                 */
+
+
                     ],
                   ),
                 )),

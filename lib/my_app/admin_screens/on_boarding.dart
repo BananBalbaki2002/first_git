@@ -14,24 +14,24 @@ class OnBarding extends StatelessWidget {
         child: Padding(
           padding:  EdgeInsets.symmetric(horizontal: size.width*0.03, vertical:size.width*0.03),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            //mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: size.height*0.09,),
               Text(
                 'Tasko',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
               ),
               SizedBox(height: size.height*0.02,),
               Image.asset('images/first.png'),
-              SizedBox(height: size.height*0.02,),
+              SizedBox(height: size.height*0.03,),
               Text(
-                'the Greate Idea ',
-                style: TextStyle(fontSize: 25),
+                'The Greate Idea ',
+                style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),
               ),
               Text(
-                "Welcome to our application where ."
-                    "you find comfort and safety."
-                    "Welcome to our application where ."
-                    "you find comfort and safety.",
+                  "Working with experience team make "
+                      "work easier & get closer to Goals."
+                  ,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20, color: Colors.grey),
               ),
@@ -45,7 +45,7 @@ class OnBarding extends StatelessWidget {
 
         ),
       ),
-      floatingActionButton: FloatingActionButton(backgroundColor:kblue,onPressed: (){
+      floatingActionButton: FloatingActionButton(backgroundColor:Colors.blue,onPressed: (){
         Navigator.pushNamed(context, '/login');
 
       },child: Icon(Icons.arrow_forward_outlined),),

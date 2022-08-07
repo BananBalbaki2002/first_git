@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:tasko/my_app/screens/card_subtask.dart';
+import 'package:tasko/components/card_subtask.dart';
 
-class TaskDetails extends StatefulWidget {
+class OldTaskDet extends StatefulWidget {
   List<Color> coloritem = [
     Colors.indigo,
     Colors.purple,
@@ -14,10 +14,10 @@ class TaskDetails extends StatefulWidget {
 
 
   @override
-  State<TaskDetails> createState() => _TaskDetailsState();
+  State< OldTaskDet> createState() => _OldTaskDetState();
 }
 
-class _TaskDetailsState extends State<TaskDetails> {
+class _OldTaskDetState extends State< OldTaskDet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -213,7 +213,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                           itemCount: widget.coloritem.length,
                           itemBuilder: (context, index) =>
 
-                              CardSubTask(color:widget.coloritem[index])
+                              CardSubTask()
 
                       )),
                 ],
