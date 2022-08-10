@@ -1,6 +1,6 @@
 import 'package:tasko/my_models/user_model.dart';
 
-class SubTask {
+class ModelSubTask {
   var id;
   String? title;
   String? description;
@@ -9,10 +9,10 @@ class SubTask {
   var priority_id;
   var status_id;
   var task_id;
- List<User>? members;
 
 
-  SubTask(
+
+  ModelSubTask(
       {this.priority_id,
       this.id,
       this.start_at,
@@ -21,7 +21,7 @@ class SubTask {
       this.title,
       this.end_at,
       this.task_id,
-      this.members
+
       });
 
   /*
@@ -37,7 +37,7 @@ class SubTask {
                     "members": 
    */
 
-  factory SubTask.fromJson(Map<String, dynamic> json) => SubTask(
+  factory ModelSubTask.fromJson(Map<String, dynamic> json) => ModelSubTask(
       title: json['title'],
       description: json['description'],
       start_at: json['start_at'],
@@ -45,6 +45,5 @@ class SubTask {
       status_id: json['status_id'],
       task_id: json['task_id'],
       priority_id: json['priority_id'],
-      members: json['members'],
       id: json['id']);
 }

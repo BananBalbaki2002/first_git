@@ -212,8 +212,8 @@ class _OldTaskDetState extends State< OldTaskDet> {
                       child: ListView.builder(
                           itemCount: widget.coloritem.length,
                           itemBuilder: (context, index) =>
-
-                              CardSubTask()
+Container()
+                             // CardSubTask()
 
                       )),
                 ],

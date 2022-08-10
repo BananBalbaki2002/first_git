@@ -2,13 +2,14 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:tasko/my_models/model_task_subtask.dart';
 import 'package:tasko/my_models/task_model.dart';
 import 'package:tasko/services/task_service.dart';
 import 'package:tasko/services/user_service.dart';
 
 class TaskController with ChangeNotifier{
 
-
+static var model;
   List<Task> list_of_tasks=[];
 
   TextEditingController titleController=TextEditingController();
@@ -86,9 +87,10 @@ Future<List<Task>> onClickshowTasks()async{
 
 //--------------ShowOneTask-------------------------------------
 
-Future  onClickshowOneTask()async{
+  static Future<Model_Task_SubTask>  onClickshowOneTask()async{
 
-  await  TaskService.servOneTask();
+  model=await  TaskService.servOneTask();
+  return model;
 }
 //----------------showCompletedTasks-----------
   Future<List<Task>> onClickshowCompletedTasks()async{

@@ -1,10 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:tasko/my_models/model_task_subtask.dart';
+import 'package:tasko/my_models/sub_task_model.dart';
 
 class CardSubTask extends StatelessWidget {
+ var lsubtask;
+ int index;
+CardSubTask({required this.lsubtask,required this.index});
 
-
-  @override
+@override
   Widget build(BuildContext context) {
     return
       Container(
@@ -51,7 +55,7 @@ class CardSubTask extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        'HR Manager\'s Day',
+                       '${ 'hhhh'}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold),
                       ),
@@ -59,7 +63,7 @@ class CardSubTask extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        'This is description about sub task',
+                        '${ 'kkkkkk'}',
                         style: TextStyle(
                             fontSize: 12, color: Colors.grey),
                       ),

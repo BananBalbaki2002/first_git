@@ -4,14 +4,17 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:tasko/controllers/login_controller.dart';
+import 'package:tasko/controllers/profile_controller.dart';
+import 'package:tasko/controllers/task_controller.dart';
 import 'package:tasko/controllers/user_controller.dart';
 import 'package:tasko/controllers/meeting_controller.dart';
 import 'package:tasko/my_app/constants.dart';
+import 'package:tasko/services/task_service.dart';
 
 class Dashboard extends StatelessWidget {
-  UserController  userController=UserController();
-  MeetingController meetingController=MeetingController();
-
+  //UserController  userController=UserController();
+  //MeetingController meetingController=MeetingController();
+ // TaskController taskController=TaskController();
   List<String> nameArea = [
     'teams',
     'Users',
@@ -68,7 +71,15 @@ class Dashboard extends StatelessWidget {
 
 
 
-          }),
+          },
+          onPressedSuf: (){
+Navigator.pushNamed(context,  '/PageOne');
+
+
+          }
+
+
+          ),
 
       body:   Padding(
         padding: EdgeInsets.only(

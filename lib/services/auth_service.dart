@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:tasko/config/server_config.dart';
@@ -48,20 +49,16 @@ print(json['token']);
   //  return false;
   }}
 //-------------------------LOGOUT----------------------------------------
-  static Future<String> logoutfun()async{
+  static Future  logoutfun()async{
     var response = await http.get(
   Uri.parse(ServerConfig.domainName +ServerConfig.logout),
   headers: {
-    //-------------------------------------------------
 
-    'Authorization': 'Bearer ${GetStorage().read('token')}',
-// HttpHeaders.authorizationHeader: 'Bearer ${GetStorage().read('token')}',
-
-  //-----------------------------------------------------------------------
+HttpHeaders.authorizationHeader: 'Bearer ${GetStorage().read('token')}',
     'Accept':'application/json'
 
   },);
-Map<String,dynamic> json=jsonDecode(response.body);
+var  json=jsonDecode(response.body);
     print(await GetStorage().read('token'));
 await GetStorage().remove('token');
 print('the message is ');

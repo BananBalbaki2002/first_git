@@ -7,7 +7,11 @@ import 'dart:async';
 import 'package:get_storage/get_storage.dart';
 import 'package:tasko/config/server_config.dart';
 import 'package:tasko/my_app/admin_screens/login_screen.dart';
+import 'package:tasko/my_app/admin_screens/sub_task.dart';
+import 'package:tasko/my_models/model_task_subtask.dart';
+import 'package:tasko/my_models/sub_task_model.dart';
 import 'package:tasko/my_models/task_model.dart';
+import 'package:tasko/my_models/user_model.dart';
 
 class  TaskService{
 
@@ -176,12 +180,58 @@ print(id_task);
     print(models);
     return models;
 
-
-
-
-
-
   }
+  //-----------------------ShowOneTask--------------------
+
+  static Future ShowOneTask()async{
+
+
+    var response = await http.get(  Uri.parse('http://192.168.1.103:8000/api/show/details/3')
+        ,
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer ${GetStorage().read(
+              'token')}',
+          'Accept': 'application/json'
+        });
+
+
+
+    var json= jsonDecode(response.body);
+
+var onetask=json['the info about task'];
+print(response.statusCode);
+
+print(json['the info about task']);
+var model=[];
+
+for(var ta in onetask){
+/*
+print(ta[]
+  {
+            "id": 3,
+            "title": "Charity management system",
+            "description": "this system will help people and financiers",
+            "start_date": "2022-08-01",
+            "end_date": "2022-10-15",
+            "status_id": 1,
+            "team_id": 2,
+            "created_at": "2022-07-02T11:00:36.000000Z",
+            "updated_at": "2022-07-14T22:23:01.000000Z",
+            "subtasks": [
+ */
+
+/*
+model.add( Model_Task_SubTask_User(Task.fromJson(json),
+    ModelSubTask.fromJson(ta['subtasks']),
+    User.fromJson(ta['subtasks']['members'])));
+*/
+
+}
+
+
+}
+
+
   //-------------------CompletedTask-------
   static Future<List<Task>>  servCompletedTasks()async{
 
@@ -299,10 +349,10 @@ print(id_task);
 
 static  Future   servOneTask()async{
 
-    int id=5;
+
 
     var response=await http.get(
-      Uri.parse(ServerConfig.domainName+ServerConfig.showOneTask+'${id}'),
+      Uri.parse('http://192.168.43.44:8000/api/show/details/3'),
 
      headers: {
        HttpHeaders.authorizationHeader: 'Bearer ${GetStorage().read(
@@ -310,29 +360,50 @@ static  Future   servOneTask()async{
        'Accept': 'application/json'
 
      }
-
-
-
     );
 
     var json=jsonDecode(response.body);
-
+var model;
+print(response.statusCode);
+print('json');
     print(json);
+var subtaskUser;
+for(var ta in json['the info about task']) {
+  print('ta');
+  print(ta);
+  print('sub');
+  print(ta['subtasks']);
+ var lSubTask=ta['subtasks'];
+
+ for(var su in lSubTask){//one subtask
+
+    subtaskUser =ModelSubTaskUser(
+       su,su['members']);
+
+
+ }
 
 
 
 
 
 
+if(json['the info about task'] !=null)
+   return Model_Task_SubTask(
+      Task.fromJson(ta), lSubTask);
+
+return [];
+
+}
+
+//model.name
+  //model.id
+  //model.subtask.
+  //model.subtask.memmber.
+//return model;
+}
 
 }
 
 
 
-
-
-
-
-
-
-}

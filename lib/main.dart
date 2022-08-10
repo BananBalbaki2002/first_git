@@ -23,6 +23,8 @@ import 'my_app/admin_screens/add_task.dart';
 import 'my_app/team_leader_screens/dashboard_team_leader.dart';
 import 'my_app/admin_screens/edit_task.dart';
 import 'my_app/widgets/my_screen.dart';
+import 'my_app/widgets/page_one.dart';
+import 'my_app/widgets/second_page.dart';
 
 
 
@@ -66,17 +68,17 @@ class MyApp extends StatelessWidget {
         '/AddTask':(context) => AddTask(),
         '/EditTask':(context)=>EditTask(),
         '/TaskDetail':(context)=>TaskDetail(),
-    //    '/PageOne':(context) => PageOne(),
-     //   '/PageTwo':(context)=>PageTwo(),
+       '/PageOne':(context) => PageOne(),
+        '/SecondPage':(context)=>SecondPage(),
 
 
 '/DashboardTeamLeader':(context)=>DashboardTeamLeader()
 
        },
 
-home:TaskScreen(),
+//home:SecondPage(),
 
-//     initialRoute: GetStorage().hasData('token') ? '/Dashboard' : '/login',
+      initialRoute: GetStorage().hasData('token') ? '/Dashboard' : '/login',
 
       builder: EasyLoading.init(),
     ));

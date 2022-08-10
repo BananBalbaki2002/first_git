@@ -5,7 +5,7 @@ class ServerConfig{
 
 
 
-  static String  domainName='http://192.168.1.103:8000/';
+  static String  domainName='http://192.168.43.44:8000/';
 
   //------------Auth-------------------
   static String login='api/auth/login';
@@ -24,7 +24,7 @@ static String addTask='api/admin/task/add';
 static String editTask='api/admin/task/update/';
 static String deleteTask='api/admin/task/delete/';
 static String showTasks='api/show/MyTask';
-static String showOneTask='api/show/details/';
+static String showOneTask='api/show/details/1';
 static String showCompletedTasks='api/show/completed/tasks';
 static String showMissedTasks='api/show/missed/tasks';
 static String  showOnProgressTasks='api/show/progress/tasks';
