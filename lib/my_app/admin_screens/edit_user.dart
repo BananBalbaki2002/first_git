@@ -3,7 +3,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:tasko/components/custom_field.dart';
 import 'package:tasko/controllers/task_controller.dart';
-import 'package:tasko/controllers/team_controller.dart';
 import 'package:tasko/controllers/user_controller.dart';
 
 
@@ -15,7 +14,7 @@ class EditUser extends StatefulWidget {
 
   //UserController userController=UserController();
   TaskController   taskController=TaskController();
-  TeamController  teamController= TeamController();
+ // TeamController  teamController= TeamController();
 
   List<int> RoleIdList = [2,3];
   List<int> teamIdList = [1,2,3];

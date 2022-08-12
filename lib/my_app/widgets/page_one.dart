@@ -61,8 +61,11 @@ class _PageOneState extends State<PageOne> {
                   print(await widget.img_path);
 
 
-                  await widget.profileController.onClickAddProfile(
+                 var res= await widget.profileController.onClickAddProfile(
                       widget.img_path!);
+                 if(res != null){
+                   print('the not found');
+                 }
 
                   /*
                   if (widget.profileController.profileobj != null) {

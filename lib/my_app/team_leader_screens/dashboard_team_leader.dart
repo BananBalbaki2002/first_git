@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:tasko/controllers/login_controller.dart';
 import 'package:tasko/controllers/user_controller.dart';
 
+import '../constants.dart';
+
 class DashboardTeamLeader extends StatelessWidget {
   UserController  userController=UserController();
 
@@ -17,123 +19,135 @@ class DashboardTeamLeader extends StatelessWidget {
     'Calender',
     'Meeting'
   ];
+
+  List pushtoArea=[
+
+    // '/teams',
+    '/Users',
+    '/Users',
+    //  '/Report',
+    '/Users',
+    '/LTasks',
+    //  '/Calender',
+    '/LTasks',
+    //   '/Metting'
+    '/LTasks'
+
+  ];
+  List imgArea=[
+    'images/metting.png',
+    'images/first.png',
+    'images/first.png',
+    'images/tasks.png',
+    'images/first.png',
+    'images/metting.png'
+
+
+
+
+  ];
+
   LoginController loginController = LoginController();
-  @override
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return  Scaffold(
-        backgroundColor: Color(0xffFFD39A),
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(size.width * 0.02,
-                size.width * 0.03, size.width * 0.02, size.width * 0.01),
-            child: Column(
-              children: [
-                Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child:
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //SizedBox(),
-                        CircleAvatar(
-                            radius: 18,
-                            backgroundColor: Colors.grey[200],
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.arrow_back_outlined,
-                                color: Colors.black,
-                              ),
-                              onPressed: (() async {
-                                EasyLoading.show(status: 'Loading....');
-                                userController.onClickShowAllUser();
+      backgroundColor:Colors.blue,
+      appBar: buildAppBar(text: 'Dashboard',fontsize: 23, suffixIcon:Icons.notifications_outlined,
+          prefixIcon: Icons.menu,onPressedPre: ()async{
 
 
-                                EasyLoading.showSuccess('missed');
+            EasyLoading.show(status: 'Loading....');
 
-                              }),
-                            )),
-                        Text(
-                          'Dashboard',
-                          style: TextStyle(
-                              fontSize: 30,
-                              color: Color(0xff2F3A8F),
-                              fontWeight: FontWeight.bold),
-                        ),
-                        CircleAvatar(
-                            radius: 18,
-                            backgroundColor: Colors.grey[200],
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.logout,
-                                color: Colors.black,
-                              ),
-                              onPressed: (() async {
-                                EasyLoading.show(status: 'Loading....');
-                                await loginController.onClickLogout();
+            await loginController.onClickLogout();
 
-                                Navigator.pushReplacementNamed(
-                                    context, '/login');
-                                EasyLoading.showSuccess(loginController.message);
+            Navigator.pushReplacementNamed(
+                context, '/login');
+            EasyLoading.showSuccess(loginController.message);
 
-                              }),
-                            )),
-                      ],
-                    )),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        top: size.width * 0.06,
-                        bottom: 0,
-                        left: size.width * 0.004,
-                        right: size.width * 0.004),
-                    child: StaggeredGridView.countBuilder(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      itemCount: nameArea.length,
-                      itemBuilder: (context, index) => InkWell(
-                          onTap: () {
 
-                          },
-                          child:
 
-                          // cardArea(nameArea: nameArea,index:index),
-                          cardArea(index)),
-                      staggeredTileBuilder: (int index) =>
-                      (index + 1) % 3 == 0
-                          ? StaggeredTile.extent(2, size.width * 0.44)
-                          : StaggeredTile.extent(1, size.width * 0.43),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ));
+
+          },
+          onPressedSuf: (){
+            //Navigator.pushNamed(context, '/Tasks');
+
+
+          }
+
+
+      ),
+
+      body:   Padding(
+        padding: EdgeInsets.only(
+            top: size.width * 0.06,
+            bottom: 0,
+            left: size.width * 0.004,
+            right: size.width * 0.004),
+        child: StaggeredGridView.countBuilder(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          itemCount: nameArea.length,
+          itemBuilder: (context, index) => InkWell(
+              onTap: () {
+
+
+                Navigator.pushNamed(context, pushtoArea[index]);
+              },
+              child:
+
+              // cardArea(nameArea: nameArea,index:index),
+              cardArea(index)),
+          staggeredTileBuilder: (int index) =>
+          (index + 1) % 3 == 0
+              ? StaggeredTile.extent(2, size.width * 0.44)
+              : StaggeredTile.extent(1, size.width * 0.43),
+        ),
+      ),
+
+
+
+
+
+    );
+
+
+
+
+
+
   }
 
   Container cardArea(int index) {
     return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: (index + 1) % 3 == 0 ? Color(0xff2F3A8F) : Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(-2, -2),
-              blurRadius: 8,
-            )
-          ]),
-      child: Center(
-        child: Text(
-          nameArea[index],
-          style: TextStyle(
-              color: (index + 1) % 3 == 0 ? Colors.white : Color(0xff2F3A8F),
-              fontWeight: FontWeight.bold,
-              fontSize: 20),
-        ),
-      ),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: (index + 1) % 3 == 0 ? Colors.white : Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                offset: Offset(-2, -2),
+                blurRadius: 3,
+              )
+            ]),
+        child:
+        Column(
+
+          children: [
+            Text(
+              nameArea[index],
+              style: TextStyle(
+                  color: (index + 1) % 3 == 0 ? Colors.black: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20),
+            ),
+
+            Expanded(child:  Image.asset(imgArea[index]),)
+          ],
+        )
+
+
     );
   }
 }

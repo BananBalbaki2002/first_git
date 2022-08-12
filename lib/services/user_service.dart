@@ -4,6 +4,7 @@
 import 'dart:io';
 
 
+import 'package:tasko/my_models/status_model.dart';
 import 'package:tasko/my_models/task_model.dart';
 import 'package:tasko/my_models/user_model.dart';
 import 'dart:convert';
@@ -13,6 +14,9 @@ import 'dart:async';
 import 'package:tasko/config/server_config.dart';
 
 class UserService{
+
+
+
 
 //---------------------------AddUser--------------------------------
 
@@ -138,32 +142,7 @@ else
 
 
   //---------------------------------------------------
-static Future< List<User> > showAllUsers()async{
-    var response=await http.get(Uri.parse(ServerConfig.domainName+ServerConfig.showUsers),
-    headers: {
-      HttpHeaders.authorizationHeader: 'Bearer ${GetStorage().read('token')}',
-      'Accept': 'application/json'
-    });
 
-    print(response.statusCode);
-    print(response.body);
-    if(response.statusCode ==  200){
-      // allUsers  (obj from class Users)
-
-     // var allUsers = usersFromJson(response.body);
-      var allUser=userFromJson(response.body);
-      // users  (list<user>)
-      print('the list of user is ......');
-      print(allUser);
-
-     return allUser;
-      // return allUsers.users;
-    }
-    else
-    return [];
-
-
-}
 
 
 

@@ -3,9 +3,15 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
-class CalendarScreen extends StatelessWidget {
+class CalendarScreen extends StatefulWidget {
 
+  @override
+  State<CalendarScreen> createState() => _CalendarScreenState();
+}
 
+class _CalendarScreenState extends State<CalendarScreen> {
+TextEditingController controller=TextEditingController();
+String name_event='';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,16 +33,6 @@ class CalendarScreen extends StatelessWidget {
                       Text('Weekly Calendar',style: TextStyle(color:Colors.white,fontSize: 24),),
                     ]),
 
-/*
-
-  SizedBox(height: 30,),
-              Column(children: [
-                Text('Augest 19',style: TextStyle(color:Colors.white,fontSize: 20),),
-                SizedBox(height: 5,),
-                Text('10 Task today',style: TextStyle(color: Color(0xffC4DDFF))),
-
-              ],),
- */
 
 
                 SizedBox(height: 33,),
@@ -52,6 +48,8 @@ class CalendarScreen extends StatelessWidget {
                     dateTextStyle: TextStyle(fontSize: 13,fontWeight: FontWeight.w500,color: Color(0xffC4DDFF)),
                     dayTextStyle: TextStyle(fontSize: 13,fontWeight: FontWeight.w500,color: Color(0xffC4DDFF)),
                     monthTextStyle: TextStyle(fontSize: 13,fontWeight: FontWeight.w500,color: Color(0xffC4DDFF)),
+
+
 
                   ),
                 ),
@@ -189,10 +187,47 @@ class CalendarScreen extends StatelessWidget {
           ),
         )
 
+       , floatingActionButton: FloatingActionButton(backgroundColor:Colors.blue,
+        onPressed:()async{
 
+    showDialog(context: context,builder:(context) => AlertDialog(
+
+    title: Text('Creat Event'),
+    content: TextField(
+    autofocus: true,
+    decoration: InputDecoration(hintText:'Enter The title of Event',),
+    controller:controller ,
+    onSubmitted: (_) {},
+    ),
+    actions: [
+    TextButton(onPressed:(){}, child:Text('Save') )
+
+    ],
+    ) );
+
+
+        }
+
+
+        ,child: Icon(Icons.check_outlined),
+        )
 
 
 
     );
+
+
+
+
+
+
   }
+
+
+
 }
+
+
+
+
+

@@ -1,5 +1,8 @@
 import 'package:tasko/my_models/user_model.dart';
 
+import 'package:json_annotation/json_annotation.dart';
+part 'sub_task_model.g.dart';
+@JsonSerializable(explicitToJson: true)
 class ModelSubTask {
   var id;
   String? title;
@@ -9,7 +12,7 @@ class ModelSubTask {
   var priority_id;
   var status_id;
   var task_id;
-
+List<User?>? users;
 
 
   ModelSubTask(
@@ -21,9 +24,13 @@ class ModelSubTask {
       this.title,
       this.end_at,
       this.task_id,
-
+this.users
       });
 
+  factory ModelSubTask.fromJson(Map <String,dynamic> json) => _$ModelSubTaskFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ModelSubTaskToJson(this);
+}
   /*
   
    "id": 6,
@@ -35,15 +42,5 @@ class ModelSubTask {
                     "status_id": 1,
                     "task_id": 3,
                     "members": 
-   */
+ */
 
-  factory ModelSubTask.fromJson(Map<String, dynamic> json) => ModelSubTask(
-      title: json['title'],
-      description: json['description'],
-      start_at: json['start_at'],
-      end_at: json['end_at'],
-      status_id: json['status_id'],
-      task_id: json['task_id'],
-      priority_id: json['priority_id'],
-      id: json['id']);
-}

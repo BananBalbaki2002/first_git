@@ -62,6 +62,7 @@ class Dashboard extends StatelessWidget {
 
 
             EasyLoading.show(status: 'Loading....');
+
             await loginController.onClickLogout();
 
             Navigator.pushReplacementNamed(
@@ -73,7 +74,7 @@ class Dashboard extends StatelessWidget {
 
           },
           onPressedSuf: (){
-Navigator.pushNamed(context,  '/PageOne');
+Navigator.pushNamed(context, '/Tasks');
 
 
           }

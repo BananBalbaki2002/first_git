@@ -9,7 +9,7 @@ import 'package:tasko/my_models/profile_model.dart';
 import 'package:tasko/services/profile_service.dart';
 
 class   ProfileController{
-  ProfileModel?  profileobj;
+  var  profileobj;
 
 
   Future onClickAddProfile(String img_path)async{

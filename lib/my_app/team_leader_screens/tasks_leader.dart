@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasko/components/custom_field.dart';
@@ -10,12 +11,12 @@ import 'package:tasko/my_models/task_model.dart';
 
 import '../constants.dart';
 
-class TaskScreen extends StatefulWidget {
+class LTasks extends StatefulWidget {
   @override
-  State<TaskScreen> createState() => _TaskScreenState();
+  State<LTasks> createState() => _LTasksState();
 }
 
-class _TaskScreenState extends State<TaskScreen> {
+class _LTasksState extends State<LTasks> {
   //TextEditingController searchController = TextEditingController();
 
   int selected = 0;
@@ -25,7 +26,7 @@ class _TaskScreenState extends State<TaskScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     var taskController=Provider.of< TaskController >(context);
-   // var searchTaskController=Provider.of<SearchTaskController>(context);
+    // var searchTaskController=Provider.of<SearchTaskController>(context);
     return Scaffold(
       backgroundColor: kcolorApp,
       appBar: buildAppBar(text:'Tasks',fontsize:30,suffixIcon:Icons.notifications_outlined),
@@ -34,7 +35,7 @@ class _TaskScreenState extends State<TaskScreen> {
         children: [
           SearchBox(onChanded: (value){
 
-           taskController.SearchTask(value);
+            taskController.toSearch(value);
 
           }),
           Categoriess(

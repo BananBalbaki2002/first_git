@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
+import 'controllers/calendar_controller.dart';
 import 'controllers/login_controller.dart';
+import 'controllers/search_task_controller.dart';
 import 'controllers/task_controller.dart';
 import 'controllers/user_controller.dart';
+import 'my_app/admin_screens/calendar_screen.dart';
 import 'my_app/admin_screens/dashboard.dart';
 import 'my_app/admin_screens/login_screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -22,8 +25,11 @@ import 'my_app/admin_screens/edit_user.dart';
 import 'my_app/admin_screens/add_task.dart';
 import 'my_app/team_leader_screens/dashboard_team_leader.dart';
 import 'my_app/admin_screens/edit_task.dart';
+import 'my_app/team_leader_screens/tasks_leader.dart';
+import 'my_app/team_leader_screens/users_leader.dart';
 import 'my_app/widgets/my_screen.dart';
 import 'my_app/widgets/page_one.dart';
+import 'my_app/widgets/page_three.dart';
 import 'my_app/widgets/second_page.dart';
 
 
@@ -52,10 +58,12 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (_) => UserController()),
           ChangeNotifierProvider(create: (_) => TaskController()),
+          ChangeNotifierProvider(create: (_) =>CalendarContro())
         ],
       child:
     MaterialApp(
       debugShowCheckedModeBanner: false,
+
       title: 'todo app ',
       routes: {
 
@@ -70,15 +78,16 @@ class MyApp extends StatelessWidget {
         '/TaskDetail':(context)=>TaskDetail(),
        '/PageOne':(context) => PageOne(),
         '/SecondPage':(context)=>SecondPage(),
+        '/LTasks':(context)=>LTasks(),
 
 
 '/DashboardTeamLeader':(context)=>DashboardTeamLeader()
 
        },
 
-//home:SecondPage(),
+home:LUsers(),
 
-      initialRoute: GetStorage().hasData('token') ? '/Dashboard' : '/login',
+    //initialRoute: GetStorage().hasData('token') ?  fun() : '/login',
 
       builder: EasyLoading.init(),
     ));

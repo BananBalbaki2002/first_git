@@ -6,29 +6,15 @@
 
 import 'dart:convert';
 
+
+import 'package:json_annotation/json_annotation.dart';
 import 'package:tasko/my_app/admin_screens/sub_task.dart';
-
-List<Task> taskFromJson(String str) =>
-    List<Task>.from(jsonDecode(str).map((x) => Task.fromJson(x)));
-
-
-
-
-
-
+import 'package:tasko/my_models/sub_task_model.dart';
+part 'task_model.g.dart';
+@JsonSerializable(explicitToJson: true)
 class Task{
 
-  /*
-        "id": 3,
-            "title": "Charity management system",
-            "description": "this system will help people and financiers",
-            "start_date": "2022-08-01",
-            "end_date": "2022-10-15",
-            "status_id": 1,
-            "team_id": 2,
-            "created_at": "2022-07-02T11:00:36.000000Z",
-            "updated_at": "2022-07-14T22:23:01.000000Z",
-   */
+
 
   String? title;
   String? description;
@@ -37,6 +23,7 @@ class Task{
   var status_id;
   var team_id;
   var id ;
+  List<ModelSubTask?>? subtasks;
 
 //var subtasks;
 
@@ -49,10 +36,15 @@ class Task{
     this.status_id,
     this.team_id,
     this.id,
-
+this.subtasks
 
 });
-  factory  Task.fromJson(Map<String,dynamic> json)=>
+
+  factory Task.fromJson(Map <String,dynamic> json) => _$TaskFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TaskToJson(this);
+}
+  /*factory  Task.fromJson(Map<String,dynamic> json)=>
 Task(
 title: json['title'],
   description: json['description'],
@@ -62,5 +54,4 @@ title: json['title'],
     team_id:json['team_id'],
   id:json['id']
 
-);
-}
+);*/

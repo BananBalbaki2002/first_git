@@ -1,19 +1,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 import 'package:tasko/components/custom_button.dart';
 import 'package:tasko/controllers/task_controller.dart';
 import 'package:tasko/my_app/constants.dart';
 import 'package:tasko/components/card_subtask.dart';
-import 'package:tasko/my_models/model_task_subtask.dart';
 import 'package:tasko/my_models/task_model.dart';
+import 'package:tasko/my_models/sub_task_model.dart';
+import 'package:tasko/services/task_service.dart';
+
 
 class TaskDetail extends StatelessWidget {
 
 
   @override
   Widget build(BuildContext context) {
-
+    var taskController=Provider.of< TaskController >(context);
     return Scaffold(
         backgroundColor: kBackgroundColor,
 
@@ -26,8 +29,8 @@ class TaskDetail extends StatelessWidget {
             padding: const EdgeInsets.only(top:15.0,right: 15,left: 15),
             child:
 
-            FutureBuilder<Model_Task_SubTask>(
-              future: TaskController.onClickshowOneTask(),
+            FutureBuilder< Task >(
+              future: taskController.onClickshowOneTask(),
               builder: (context, snapShot) {
                 //AsyncSnapShot
                 if (snapShot.hasData)
@@ -48,7 +51,8 @@ class TaskDetail extends StatelessWidget {
 
                             ],),
 
-                            CustomButton(height: 40,width: 120, buttonName: 'In Progress',buttonColor:Colors.blue,fontSize: 15, onTap: () {  })
+                            CustomButton(height: 40,width: 120, buttonName: taskController.taskstates[taskController.id_task
+                            ],buttonColor:Colors.blue,fontSize: 15, onTap: () {  })
 
                           ],),
 
@@ -69,7 +73,7 @@ class TaskDetail extends StatelessWidget {
 
                                 Text(
 
-                '${snapShot.data!.task.title}'
+                '${snapShot.data!.title}'
                 ,
                                   style: TextStyle(fontSize: 30,),
                                 ),
@@ -81,7 +85,7 @@ class TaskDetail extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        '${snapShot.data!.task.description}'
+                                        '${snapShot.data!.description}'
                                         ,
                                         maxLines: 6,
                                         style: TextStyle(
@@ -92,11 +96,11 @@ class TaskDetail extends StatelessWidget {
                                       SizedBox(height: 7,),
                                       Row(children: [
 
-                                        Text('${snapShot.data!.task.start_date}',style: TextStyle(color:Colors.grey[600],fontWeight: FontWeight.bold),),
+                                        Text('${snapShot.data!.start_date}',style: TextStyle(color:Colors.grey[600],fontWeight: FontWeight.bold),),
                                         SizedBox(width: 7,),
                                         Container(color:Colors.grey,height: 15,width: 2,),
                                         SizedBox(width: 7,),
-                                        Text('${snapShot.data!.task.end_date}',style: TextStyle(color:Colors.grey[600],fontWeight: FontWeight.bold),),
+                                        Text('${snapShot.data!.end_date}',style: TextStyle(color:Colors.grey[600],fontWeight: FontWeight.bold),),
 
                                       ],),
 
@@ -218,11 +222,11 @@ class TaskDetail extends StatelessWidget {
                                       child:
 
                                       ListView.builder(
-                                          itemCount: snapShot.data!.lsubTask.length,
+                                          itemCount: snapShot.data!.subtasks!.length,
                                           itemBuilder: (context, index) =>
 
 
-                                              CardSubTask(lsubtask: snapShot.data!.lsubTask,index: index)
+                                              CardSubTask(lsubtask: snapShot.data!.subtasks![index],)
 
 
                                       )

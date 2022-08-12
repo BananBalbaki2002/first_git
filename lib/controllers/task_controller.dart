@@ -2,16 +2,43 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:tasko/my_models/model_task_subtask.dart';
+import 'package:tasko/my_models/status_model.dart';
 import 'package:tasko/my_models/task_model.dart';
+import 'package:tasko/services/search_service.dart';
+import 'package:tasko/services/status_service.dart';
 import 'package:tasko/services/task_service.dart';
 import 'package:tasko/services/user_service.dart';
 
 class TaskController with ChangeNotifier{
 
-static var model;
+ var model;
   List<Task> list_of_tasks=[];
+String? valueTitle;
 
+ toSearch(String value){
+
+  valueTitle =value;
+ // notifyListeners();
+}
+
+  Future SearchTask(String  value)async{
+
+   Task task=Task(
+       title: value
+
+   );
+   print('iii');
+   list_of_tasks=await SearchService.fetchTask(task);
+   notifyListeners();
+   print('ooooo');
+
+
+ }
+
+
+
+
+ var nameStatus;
   TextEditingController titleController=TextEditingController();
   TextEditingController descriptionController=TextEditingController();
   int selectedIdStatus=1;
@@ -80,18 +107,53 @@ var message;
 
 Future<List<Task>> onClickshowTasks()async{
 
-  list_of_tasks=await  TaskService. servAllTasks();
+    if(valueTitle != null){
+      Task task=Task(
+          title: valueTitle
 
+      );
+
+      print(valueTitle);
+      list_of_tasks=await  SearchService.fetchTask(task);
+    }
+    else {
+      list_of_tasks = await TaskService.servAllTasks();
+    }
   return list_of_tasks;
 }
 
+
+  Future<List<StatusModel>> fetchStates() async
+  {
+    await TaskService.subSt();
+    taskstates=await TaskService.suStatu;
+    print(taskstates);
+    print('kkk');
+    return await TaskService.subSt();
+  }
+
+
+  var taskstates;
+
+
 //--------------ShowOneTask-------------------------------------
 
-  static Future<Model_Task_SubTask>  onClickshowOneTask()async{
+   Future<Task>  onClickshowOneTask()async{
+     await fetchStates();
 
-  model=await  TaskService.servOneTask();
-  return model;
+
+
+     taskstates=await TaskService.suStatu;
+     model=await TaskService.servOneTask(id_task);
+     return model;
+
 }
+
+
+
+
+
+
 //----------------showCompletedTasks-----------
   Future<List<Task>> onClickshowCompletedTasks()async{
 
@@ -112,11 +174,19 @@ Future<List<Task>> onClickshowTasks()async{
 
   //-------------------
 
+  Future<List<Task>> onClickshowToDoTasks()async{
+
+    return  await TaskService.servToDoTasks();
+  }
+
+
+
   Map<String,Future<List< Task >>> menu = {
     "All":TaskService. servAllTasks(),
     "Completed":TaskService.servCompletedTasks(),
     "Missed":TaskService. servMissedTasks(),
-    "Progress":TaskService. servOnprogressTasks()
+    "Progress":TaskService. servOnprogressTasks(),
+    "ToDo":TaskService.servToDoTasks()
 
   };
 

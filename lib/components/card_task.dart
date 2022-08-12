@@ -14,9 +14,9 @@ import 'package:tasko/my_models/task_model.dart';
 
 class cardTask extends StatefulWidget {
 
-
-  Task? item;
-  cardTask({required this.item});
+int id;
+  Task item;
+  cardTask({required this.item,required this.id});
 
   @override
   State<cardTask> createState() => _cardTaskState();
@@ -31,13 +31,20 @@ class _cardTaskState extends State<cardTask> {
 
       GestureDetector(
         onTap: (){
-       Navigator.pushNamed(context,'/TaskDetails');
+print(widget.item.description);
+print(widget.item.title);
+print('${widget.item.end_date}');
+
+taskController.id_task=widget.item.id;
+
+
+       Navigator.pushNamed(context,'/TaskDetail');
         },
         child:
 
 
         Container(
-        height: size.width*0.43,
+        height: size.width*0.32,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Colors.grey[200],
@@ -52,7 +59,7 @@ class _cardTaskState extends State<cardTask> {
               )
             ]),
         child: Padding(
-            padding:  EdgeInsets.fromLTRB(size.width*0.044, size.width*0.033, size.width*0.042, size.width*0.01),
+            padding:  EdgeInsets.fromLTRB(size.width*0.044, size.width*0.047, size.width*0.042, size.width*0.01),
             child: Row(
               children: [
                 Expanded(
@@ -62,7 +69,7 @@ class _cardTaskState extends State<cardTask> {
                       children: [
                         Text(
 
-                         '${widget.item!.title}'
+                         '${widget.item.title}'
                       ,
                           style: TextStyle(
                               fontSize: 14,
@@ -73,7 +80,7 @@ class _cardTaskState extends State<cardTask> {
                           height: size.width*0.012,
                         ),
                         Text(
-                          '${widget.item!.description}',
+                          '${widget.item.description}',
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.grey[600],
@@ -82,60 +89,9 @@ class _cardTaskState extends State<cardTask> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         SizedBox(
-                          height: size.width*0.05,
+                          height: size.width*0.09,
                         ),
-                        Text(
-                          'Team members ',
-                          style: TextStyle(fontSize: 13, color: Colors.grey[600]),
-                        ),
-                        SizedBox(
-                          height: size.width*0.012,
-                        ),
-                        Container(
-                            width: double.infinity,
-                            child: Stack(
-                              alignment: Alignment.centerLeft,
-                              children: [
-                                CircleAvatar(
-                                  radius: 15,
-                                  backgroundImage: NetworkImage(
-                                      'https://cdn-icons-png.flaticon.com/512/219/219983.png'),
-                                ),
-                                Positioned(
-                                  left: 20,
-                                  bottom: 0,
-                                  top: 0,
-                                  child: CircleAvatar(
-                                    radius: 15,
-                                    backgroundImage: NetworkImage(
-                                        'https://createivo.com/images/q1.jpeg'),
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 40,
-                                  bottom: 0,
-                                  top: 0,
-                                  child: CircleAvatar(
-                                    radius: 15,
-                                    backgroundImage: NetworkImage(
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH6Uyi30Ty2WkMb0ZjuFLoXmkRwrrMObm-X2zztWtGbOgyA-i7mFzuiSKltN14HLAJDVM&usqp=CAU',
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 60,
-                                  bottom: 0,
-                                  child: CircleAvatar(
-                                    radius: 15,
-                                    backgroundImage: NetworkImage(
-                                        'https://www.coursle.org/assets/img/user.png'),
-                                  ),
-                                ),
-                              ],
-                            )),
-                        SizedBox(
-                          height: size.width*0.06,
-                        ),
+
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -145,153 +101,26 @@ class _cardTaskState extends State<cardTask> {
                               color: kblue,
                             ),
                             SizedBox(
-                              width: size.width*0.013,
+                              width: size.width*0.016,
                             ),
                             Text(
-                              '${widget.item!.end_date}'
+                              '${widget.item.end_date}'
 
                             ,
                               style: TextStyle(
-                                  fontSize: 13, color: Colors.grey[600]),
+                                  fontSize: 13, color: Colors.indigo,fontWeight: FontWeight.bold),
                             ),
                           ],
                         )
                       ],
                     )),
-                Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        PopupMenuButton<MenuItem>(
-                          onSelected: (item) {
-                            taskController.id_task=widget.item!.id;
 
-                            //taskController.toAssignId(widget.item!.id);
-                            print('id of user........');
-                            print(taskController.id_task);
-                            return onSelected(
-                                context, item, taskController);
-                          },
-                          itemBuilder: (context) => [
-                            ...MenuItems.items
-                                .map(buildItem)
-                                .toList()
-                          ],
-
-                         //icon: Icon(Icons.more_horiz),
-                        ),
-
-                        SizedBox(
-                          height: 14,
-                        ),
-
-
-                        CircularPercentIndicator(
-                          radius: 90,
-                          lineWidth: 6,
-                          percent: 0.3,
-                          animation: true,
-                          animationDuration: 5000,
-                          center: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '30',
-                                style: TextStyle(color: Colors.teal),
-                              ),
-                              Text(
-                                '%',
-                                style: TextStyle(color: Colors.teal),
-                              ),
-                            ],
-                          ),
-                          progressColor: Colors.teal,
-                        )
-
-
-
-                      ],
-                    )),
               ],
             )),
     ),
       );
   }
 
-  PopupMenuItem<MenuItem> buildItem(MenuItem item) => PopupMenuItem<MenuItem>(
-    value: item,
-    child: Row(
-      children: [
-        Icon(
-          item.icon,
-          color: Colors.black,
-          size: 20,
-        ),
-        SizedBox(
-          width: 12,
-        ),
-        Text(item.text),
-      ],
-    ),
-  );
 
-  void onSelected(BuildContext context, MenuItem item, var taskContr) {
-    switch (item) {
-      case MenuItems.itemDelete:
-        showCupertinoDialog(
-            context: context,
-            builder: (context) => CupertinoAlertDialog(
-              title: Text(
-                ' Are you sure about deleting?',
-                style: TextStyle(fontSize: 20),
-              ),
-              content: Text(
-                'This will completely delete the user',
-                style: TextStyle(fontSize: 16),
-              ),
-              actions: [
-                CupertinoDialogAction(
-                  child: Text('OK'),
-                  onPressed: () async {
-                    //EasyLoading.show(status: 'loading...');
-                    await taskContr.onClickDeleteTask();
-                    if(taskContr.message== 'Deleted successfully'){
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('Deleted the task '),
-                    ));
-
-
-                    print('ok');
-                    //update to list
-                    }
-                    else{
-
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(' can not Deleted the task '),
-                      ));
-                    }
-                    Navigator.pop(context);
-
-                  },
-                ),
-                CupertinoDialogAction(
-                  child: Text('Cancel'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                )
-              ],
-            ));
-
-        break;
-      case MenuItems.itemEdit:
-        print('yes edited');
-
-        Navigator.pushNamed(context, '/EditTask');
-
-        break;
-    }
-  }
 
 }
