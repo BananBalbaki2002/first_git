@@ -253,12 +253,23 @@ class _EditTaskState extends State<EditTask> {
 
     if(pickerDate !=null){
       if(isStartDate ==true) {
+        if(pickerDate.isAfter(taskContr.selectedEndDate)){
+          taskContr.selectedEndDate=pickerDate;
+        }
+
+
         setState(() {
           taskContr.selectedStartDate = pickerDate;
+
           print(taskContr.selectedStartDate);
         });
       }
       else if(isStartDate == false){
+        if(pickerDate.isBefore(taskContr.selectedStartDate)){
+          taskContr.selectedStartDate=pickerDate;
+        }
+
+
         setState(() {
           taskContr.selectedEndDate = pickerDate;
           print(taskContr.selectedEndDate);
