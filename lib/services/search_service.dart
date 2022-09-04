@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 import 'dart:io';
 
@@ -9,55 +7,62 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tasko/config/server_config.dart';
 import 'package:tasko/my_models/task_model.dart';
 
-class SearchService{
+class SearchService {
+
+//*********************************8
+  static Future<List<Task>> fetchMyTasks(Task modelTask ) async {
+    var response = await http.post(
+        Uri.parse(ServerConfig.domainName + ServerConfig.SearchOfTask),
+        body: {
+          'title': modelTask .title
+        },
+        headers: {
+          HttpHeaders.authorizationHeader:
+              'Bearer ${GetStorage().read('token')}',
+          'Accept': 'application/json'
+        });
+
+    print('the name is ');
+    print( modelTask .title);
+    var json = jsonDecode(response.body);
+    print(response.statusCode);
+    print(response.body);
+
+    List< Task > models = [];
+    print('model');
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      print('loop ');
+
+
+      for(var t in json){
+        models.add(Task.fromJson(t));
+
+      }
 
 
 
- static  Future fetchTask(Task task)async{
 
-   var response= await http.post(Uri.parse(ServerConfig.domainName+ServerConfig.SearchOfTask),
-       body: {
-         'title': task.title
+      print('loop after');
+      print(models);
+      if ( modelTask .title != null) {
+        print(' in loop');
+        models=models.where((element) =>element.title!.toLowerCase().contains(element.title!.toLowerCase())).
+        toList();
+      }
+    } else {
+      print('the model is null ');
+    }
+print('tttttttt yeeeeeees');
 
-       },
+    if(models != null) {
+      return models;
+    }
+    else{
+      return [];
+    }
 
 
-
-       headers: {
-         HttpHeaders.authorizationHeader: 'Bearer ${GetStorage().read(
-             'token')}',
-         'Accept': 'application/json'
-       }
-
-
-   );
-
-   var json = jsonDecode(response.body);
-   print(response.statusCode);
-   print(response.body);
-
-List<Task> model=[];
-if(response.statusCode ==200 || response.statusCode ==201){
-  model=json.map((e) => Task.fromJson(e)).toList();
-
-  if(task.title != null){
-    model=model.where((element) => element.title!.toLowerCase().contains(task.title!.toLowerCase())).toList();
   }
-}
-else{
-  print('there are error ');
-}
-
-return model;
-
- }
-
-
-
-
-
-
-
 
 
 }

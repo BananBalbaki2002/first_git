@@ -8,7 +8,7 @@ import 'dart:convert';
 
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tasko/my_app/admin_screens/sub_task.dart';
+import 'package:tasko/my_app/admin_view/sub_task.dart';
 import 'package:tasko/my_models/sub_task_model.dart';
 part 'task_model.g.dart';
 @JsonSerializable(explicitToJson: true)

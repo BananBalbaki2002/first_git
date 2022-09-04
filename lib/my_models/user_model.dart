@@ -30,20 +30,33 @@ class User{
   String? employee_identical;
   String? password;
   var role_id;
-  var  team_id;
-var id;
+  var team_id;
+  var id;
+  String? img_profile;
+  String? phone;
+  String? teamName;
 
- User({
-   this.first_name,
+  User({
+    this.first_name,
     this.last_name,
-   this.email,
+    this.email,
     this.employee_identical,
-   this.password,
+    this.password,
     this.role_id,
     this.team_id,
-   this.id
- });
+    this.id,
+    this.img_profile,
+    this.phone,
+    this.teamName
+  });
 
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is User && runtimeType == other.runtimeType && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 
   factory User.fromJson(Map <String,dynamic> json) => _$UserFromJson(json);
 

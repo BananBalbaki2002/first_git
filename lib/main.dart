@@ -1,43 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
+import 'package:tasko/controllers/teams_controller.dart';
+import 'package:tasko/my_app/calen_pages/page_calendar.dart';
 
-import 'controllers/calendar_controller.dart';
+import 'my_app/calen_pages/calendar_controller.dart';
 import 'controllers/login_controller.dart';
-import 'controllers/search_task_controller.dart';
+import 'controllers/meeting_controller.dart';
 import 'controllers/task_controller.dart';
 import 'controllers/user_controller.dart';
-import 'my_app/admin_screens/calendar_screen.dart';
-import 'my_app/admin_screens/dashboard.dart';
-import 'my_app/admin_screens/login_screen.dart';
+import 'my_app/admin_view/dashboard.dart';
+import 'my_app/admin_view/login_screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import 'my_app/admin_screens/on_boarding.dart';
-import 'my_app/admin_screens/sub_task.dart';
-import 'my_app/admin_screens/tasks_screen.dart';
+import 'my_app/admin_view/on_boarding.dart';
+import 'my_app/admin_view/show_user.dart';
+import 'my_app/admin_view/sub_task.dart';
+import 'my_app/admin_view/tasks_screen.dart';
 
-import 'my_app/admin_screens/task_details.dart';
-import 'my_app/admin_screens/users.dart';
-import 'my_app/admin_screens/add_user.dart';
-import 'my_app/admin_screens/attachement_screen.dart';
-import 'my_app/admin_screens/edit_user.dart';
+import 'my_app/admin_view/task_details.dart';
+import 'my_app/admin_view/users.dart';
+import 'my_app/admin_view/add_user.dart';
+import 'my_app/admin_view/edit_user.dart';
 
-import 'my_app/admin_screens/add_task.dart';
-import 'my_app/team_leader_screens/dashboard_team_leader.dart';
-import 'my_app/admin_screens/edit_task.dart';
-import 'my_app/team_leader_screens/tasks_leader.dart';
-import 'my_app/team_leader_screens/users_leader.dart';
-import 'my_app/widgets/my_screen.dart';
-import 'my_app/widgets/page_one.dart';
-import 'my_app/widgets/page_three.dart';
-import 'my_app/widgets/second_page.dart';
+import 'my_app/admin_view/add_task.dart';
+import 'my_app/calen_pages/all_event_scr.dart';
+import 'my_app/calen_pages/edit_event_scr.dart';
+import 'my_app/notifications_dec/notification_controller.dart';
+import 'my_app/search_widg/search_page.dart';
+import 'controllers/statistics_controller.dart';
+import 'my_app/admin_view/statistics_screen.dart';
+import 'my_app/team_leader_view/led_screens/add_attachement.dart';
+import 'my_app/team_leader_view/attachement_controller.dart';
+import 'my_app/team_leader_view/led_screens/comments.dart';
+import 'my_app/team_leader_view/led_screens/leader_meeting.dart';
+import 'my_app/team_leader_view/led_screens/leader_tasks_scre.dart';
+import 'my_app/team_leader_view/led_screens/led_attachement_scre.dart';
+import 'my_app/team_leader_view/led_screens/led_datails_task.dart';
+import 'my_app/team_member_view/dashboard_member.dart';
+import 'my_app/team_leader_view/led_screens/dashboard_team_leader.dart';
+import 'my_app/admin_view/edit_task.dart';
+import 'my_app/team_member_view/member_statistics_scr.dart';
+import 'my_app/team_member_view/member_task_scr.dart';
+import 'my_app/notifications_dec/notifications_scre.dart';
+import 'my_app/admin_view/team_selected.dart';
 
 
-
-
-
-
-//import 'package:get_storage/get_storage.dart';
 
 
 
@@ -58,7 +66,15 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (_) => UserController()),
           ChangeNotifierProvider(create: (_) => TaskController()),
-          ChangeNotifierProvider(create: (_) =>CalendarContro())
+          ChangeNotifierProvider(create: (_)=> MeetingsController()),
+          ChangeNotifierProvider(create: (_) =>TeamsController()),
+    ChangeNotifierProvider(create: (_) =>StatisticsController()),
+          ChangeNotifierProvider(create: (_) =>AttachementController()),
+          ChangeNotifierProvider(create: (_) => NotificationController()),
+          ChangeNotifierProvider(create: (_) => MyCalendarCont()),
+
+
+
         ],
       child:
     MaterialApp(
@@ -69,25 +85,41 @@ class MyApp extends StatelessWidget {
 
         '/login': (context) => Login(),
         '/Dashboard': (context) => Dashboard(),
-        '/Tasks': (context) => TaskScreen(),
+        '/TaskScre': (context) => TaskScre(),
         '/AddUser':(context) => AddUser(),
         '/Users':(context)=> Users(),
         '/EditUser':(context) => EditUser(),
         '/AddTask':(context) => AddTask(),
         '/EditTask':(context)=>EditTask(),
         '/TaskDetail':(context)=>TaskDetail(),
-       '/PageOne':(context) => PageOne(),
-        '/SecondPage':(context)=>SecondPage(),
-        '/LTasks':(context)=>LTasks(),
+'/TeamSelected':(context)=>TeamSelected(),
+        '/StatisticsScre':(context)=>StatisticsScre(),
+'/SearchPage':(context)=>SearchPage(),
+'/MTaskScr':(context)=>MTaskScr(),
+        '/LedTaskScreen':(context)=>LedTaskScreen(),
+'/user':(context)=>UserScreen(),
+        // '/a_subtask':(context){return ASubTask();},
+        // '/l_subtask':(context){return LeaderSubTask();},
+        // '/msubtask':(context){return MemSubTask();},
+        '/MStatisticsScre':(context)=>MStatisticsScre(),
+        '/NotificationsScre':(context)=>NotificationsScre(),
+'/DashboardTeamLeader':(context)=>DashboardTeamLeader(),
+        '/DashboardMember':(context)=>DashboardMember(),
+        '/Comments':(context)=>Comments(),
+        '/MeetingForLeaderOm ':(context)=>MeetingForLeaderOm(),
+'/PageCalendar':(context)=>PageCalendar(),
+        '/LAttachementScr':(context)=>LAttachementScr(),
+        '/AllEvents':(context)=>AllEvents(),
+        '/LDetailsTask':(context)=>LDetailsTask(),
+        '/AddAttachement':(context)=> AddAttachement(),
+        '/EditEvent':(context)=>EditEventScr(),
 
-
-'/DashboardTeamLeader':(context)=>DashboardTeamLeader()
 
        },
 
-home:LUsers(),
+//home:PageBanan(),
 
-    //initialRoute: GetStorage().hasData('token') ?  fun() : '/login',
+ initialRoute: GetStorage().hasData('token') ?  fun() : '/login',
 
       builder: EasyLoading.init(),
     ));
@@ -105,6 +137,11 @@ home:LUsers(),
     else if(role_id == 2){
       return '/DashboardTeamLeader';
     }
+
+    else if(role_id == 3){
+    return '/DashboardMember';
+    }
+
 
   }
 

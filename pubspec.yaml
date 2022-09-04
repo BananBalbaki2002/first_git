@@ -52,7 +52,10 @@ dependencies:
   json_serializable: ^4.1.3
   syncfusion_flutter_calendar: ^19.1.59
   intl: ^0.17.0
-
+  fl_chart: ^0.55.1
+  syncfusion_flutter_charts: ^19.4.56
+  google_fonts: 2.2.0
+  comment_box: ^0.0.17
 dev_dependencies:
   flutter_test:
     sdk: flutter

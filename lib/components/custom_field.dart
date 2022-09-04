@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CustomField extends StatefulWidget {
 final Color? colorField;
-final String hintText;
+final String? hintText;
 final String? labelText;
 final  TextInputType? keyboard;
 final double? height;
@@ -12,6 +12,7 @@ Widget? prefixIcon;
  final bool isPassword;
  final bool allBorder;
  final Color? hintColor;
+ var validator;
  final double? borderRadius;
 final Widget? iconWidget;
 
@@ -25,13 +26,13 @@ this.iconWidget,
   this.hintColor,
   this.labelText,
   required this.allBorder,
-  required this.hintText,
+  this.hintText,
   required this.isPassword,
    this.controller,
   this.keyboard,
   this.colorField,
-  this.prefixIcon
-
+  this.prefixIcon,
+required this.validator
 
 
 });
@@ -48,7 +49,7 @@ class _CustomFieldState extends State<CustomField> {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-
+padding: EdgeInsets.only(right: 10),
 height: widget.height,
       decoration: BoxDecoration(
         color:widget.colorField ?? Colors.grey[200],
@@ -65,7 +66,8 @@ height: widget.height,
 
       ),
 
-      child:   Center(
+      child:
+      Center(
         child:
 
        Row(children: [
@@ -75,6 +77,7 @@ height: widget.height,
            obscureText: widget.isPassword ? widget.unVisable : false,
            cursorColor: Colors.indigo,
            keyboardType: widget.keyboard ?? TextInputType.text,
+           validator: widget.validator,
            style: TextStyle(
              color:Colors.grey[800],
              fontSize: 18,

@@ -5,60 +5,84 @@ import 'package:flutter/material.dart';
 import 'package:tasko/my_models/status_model.dart';
 import 'package:tasko/my_models/task_model.dart';
 import 'package:tasko/services/search_service.dart';
-import 'package:tasko/services/status_service.dart';
 import 'package:tasko/services/task_service.dart';
 import 'package:tasko/services/user_service.dart';
 
 class TaskController with ChangeNotifier{
 
  var model;
+ List<String> list_Name_states=[];
+ Map<String,int>map_nameStates_id={};
+
+ var l_One_task;
+ String? query;
+
+
   List<Task> list_of_tasks=[];
-String? valueTitle;
+ List<Task> comp_tasks=[];
+ List<Task> miss_tasks=[];
+ List<Task> prog_tasks=[];
+ List<Task> todo_tasks=[];
 
- toSearch(String value){
+toSearch(String ? value){
+query=value;
+notifyListeners();
 
-  valueTitle =value;
- // notifyListeners();
 }
 
-  Future SearchTask(String  value)async{
 
-   Task task=Task(
-       title: value
 
-   );
-   print('iii');
-   list_of_tasks=await SearchService.fetchTask(task);
-   notifyListeners();
-   print('ooooo');
+
+
+
+ //************************8888
+  List<Task> listSearch=[];
+
+ Future<List <Task>> searchTasksFromapi() async {
+   Task task=Task(title: query.toString());
+if(query ==''){
+  return listSearch;
+}
+
+else {
+  listSearch = await SearchService.fetchMyTasks(task);
+  return listSearch;
+}
+
 
 
  }
 
 
+//************************888
 
-
- var nameStatus;
+  var nameStatus;
   TextEditingController titleController=TextEditingController();
   TextEditingController descriptionController=TextEditingController();
-  int selectedIdStatus=1;
-  int selectedIdTeam=1;
+  int?  selectedIdTeam;
+  int?   mychoosStatusId;
   DateTime selectedStartDate=DateTime.now();
   DateTime selectedEndDate=DateTime.now();
   int  id_task=0;
-var addedTask;
-var editedTask;
+  var addedTask;
+  var editedTask;
+
+
+
+
 
 //--------------AddTask-------------------------------------
 Future  onClickAddTask()async{
 
-  Task taskModel=Task(title:titleController.text ,description:descriptionController.text ,
-      start_date:selectedStartDate.toString() ,end_date:selectedEndDate.toString() ,status_id:selectedIdStatus.toString() ,team_id:selectedIdTeam.toString() );
+  Task taskModel=Task(title:titleController.text ,
+      description:descriptionController.text ,
+      start_date:selectedStartDate.toString() ,
+      end_date:selectedEndDate.toString() ,
+      team_id:selectedIdTeam.toString() );
 
     addedTask=await TaskService.addTask(taskModel);
   list_of_tasks.add(addedTask);
   notifyListeners();
-
 
 
 
@@ -68,7 +92,7 @@ Future onClickEditTask()async{
 
   Task taskModel=Task(title:titleController.text ,description:descriptionController.text ,
       start_date:selectedStartDate.toString()
-      ,end_date:selectedEndDate.toString() ,status_id:selectedIdStatus.toString()
+      ,end_date:selectedEndDate.toString() ,status_id: mychoosStatusId.toString()
       ,team_id:selectedIdTeam.toString() );
 
 
@@ -77,9 +101,13 @@ Future onClickEditTask()async{
     if(us.id == id_task){
       us=editedTask;
       notifyListeners();
+      //notifyListeners();
       break;
     }
   }
+
+
+
 }
 var message;
 //-------------------------------
@@ -88,15 +116,15 @@ var message;
     print(id_task);
 
     message=await await TaskService.deleteTask(id_task);
-
-    //int index,int id
-    for (var us in list_of_tasks) {
-      if (us.id == id_task) {
+    for(var us in list_of_tasks){
+      if(us.id == id_task){
         list_of_tasks.remove(us);
         notifyListeners();
         break;
       }
     }
+
+
 
 
 
@@ -106,30 +134,30 @@ var message;
 //--------------ShowAllTask-------------------------------------
 
 Future<List<Task>> onClickshowTasks()async{
-
-    if(valueTitle != null){
-      Task task=Task(
-          title: valueTitle
-
-      );
-
-      print(valueTitle);
-      list_of_tasks=await  SearchService.fetchTask(task);
-    }
-    else {
       list_of_tasks = await TaskService.servAllTasks();
-    }
+
   return list_of_tasks;
 }
 
 
   Future<List<StatusModel>> fetchStates() async
   {
-    await TaskService.subSt();
+    var h;
+   h =await TaskService.subSt();
+    //map[id]=name
     taskstates=await TaskService.suStatu;
-    print(taskstates);
-    print('kkk');
-    return await TaskService.subSt();
+
+    //list of name states tasks
+    list_Name_states=await TaskService.stt;
+    print('name  status tasks');
+    print(list_Name_states);
+
+    map_nameStates_id=await TaskService.idMap;
+    print(' map_nameStates_id');
+    print( map_nameStates_id);
+
+    // return all obj status
+    return h;
   }
 
 
@@ -137,58 +165,55 @@ Future<List<Task>> onClickshowTasks()async{
 
 
 //--------------ShowOneTask-------------------------------------
+  var l;
+Future <Task> testy()async{
+  await fetchStates();
+  l=await TaskService.serTesty(id_task);
+     return l;
 
-   Future<Task>  onClickshowOneTask()async{
-     await fetchStates();
 
-
-
-     taskstates=await TaskService.suStatu;
-     model=await TaskService.servOneTask(id_task);
-     return model;
 
 }
 
 
-
-
-
-
 //----------------showCompletedTasks-----------
   Future<List<Task>> onClickshowCompletedTasks()async{
+    comp_tasks=await TaskService. servCompletedTasks();
+    return   comp_tasks;
 
-    return  await TaskService. servCompletedTasks();
   }
 
   //-----------------MissedTasks------------------
   Future<List<Task>> onClickshowMissedTasks()async{
-
-    return  await TaskService. servMissedTasks();
+    miss_tasks=await TaskService. servMissedTasks();
+    return  miss_tasks;
   }
 
   //-----------------OnProgressTasks------------------
   Future<List<Task>> onClickshowOnProgressTasks()async{
 
-    return  await TaskService. servOnprogressTasks();
+    prog_tasks=await TaskService. servOnprogressTasks();
+    return  prog_tasks;
   }
 
   //-------------------
 
   Future<List<Task>> onClickshowToDoTasks()async{
-
-    return  await TaskService.servToDoTasks();
+todo_tasks=await TaskService.servToDoTasks();
+    return  todo_tasks;
   }
 
+  List<Task> led_todo_task=[];
+  Future <List<Task>> lShowToDoTasks()async{
+    led_todo_task=await TaskService.lToDoTasks();
+    return led_todo_task;
+  }
 
-
-  Map<String,Future<List< Task >>> menu = {
-    "All":TaskService. servAllTasks(),
-    "Completed":TaskService.servCompletedTasks(),
-    "Missed":TaskService. servMissedTasks(),
-    "Progress":TaskService. servOnprogressTasks(),
-    "ToDo":TaskService.servToDoTasks()
-
-  };
+List<Task> led_all_task=[];
+  Future<List<Task>> lShowALLTasks()async{
+    led_all_task=await TaskService.lAllTasks();
+    return  led_all_task;
+  }
 
 
 

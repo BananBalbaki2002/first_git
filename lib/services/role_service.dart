@@ -12,29 +12,62 @@ import 'package:tasko/my_models/model_role.dart';
 class RoleService{
 
 
-  static Future ShowAllRole()async{
+  // map[id]=name
+  static Map<dynamic,String>idMapRole={};
+  //map[name]=id
+  static Map<String,int> nameMapRole={};
+  static List<String> name_Roles=[];
 
+
+  static Future ShowAllRole()async{
+    List<RoleModel> roles=[];
     var response = await http.get(
-        Uri.parse(ServerConfig.domainName + ServerConfig.showAllRole)
+        Uri.parse(ServerConfig.domainName +'api/show4'),
+
 
 
     );
 
 
-    var json = jsonDecode(response.body);
-    List <RoleModel> model=[];
-    for(var st in json) {
-      if (st['id'] != 1) {
-        model.add(RoleModel.fromJson(st));
+    List<dynamic> r = jsonDecode(response.body);
+
+    print(response.statusCode);
+
+    print(r[0]["id"]);
+
+
+    for (var i=0; i<r.length ;i++)//var t in jsonData
+        {
+      roles.add( RoleModel.fromJson(r[i]));
+
+
+      idMapRole[roles[i].id]=roles[i].position!;
+
+      print(' idMapRole[roles[0].id]  :');
+      print( idMapRole[roles[0].id]);
+
+      nameMapRole[roles[i].position!]=roles[i].id;
+      print('  nameMapRole[roles[i].position!] :');
+
+      print( nameMapRole[roles[i].position!]);
+      print('here.......');
+
+
+
+      if((!roles.contains(roles[i].position ) )&&  roles[i].position !='admin' ){
+
+        name_Roles.add(roles[i].position!);
       }
 
-      if (model != null) {
-        return model;
-      }
-      else {
-        return [];
-      }
-    }}
+print(name_Roles);
+
+
+
+
+
+  }
+  return roles;
+  }
 
 
 

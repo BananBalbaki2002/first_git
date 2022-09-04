@@ -1,23 +1,27 @@
 import 'package:tasko/my_models/user_model.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-class MeetingModel {
+
+
+part 'meeting_model.g.dart';
+
+
+@JsonSerializable(explicitToJson: true)
+class  MeetingModel {
   String? meeting_date;
   String? start_at;
+  var meeting_status;
+  String? updated_at;
+  String? created_at;
   var id;
-  var meeting_statuses_id;
-  List participant;
-  MeetingModel(
-      {this.meeting_date,
-      this.meeting_statuses_id,
-      this.id,
-      this.start_at,
-      required this.participant});
 
-  factory MeetingModel.fromJson(Map<String, dynamic> json) => MeetingModel(
-        meeting_date: json[' meeting_date'],
-        start_at: json['start_at'],
-        id: json['id'],
-        meeting_statuses_id: json['meeting_statuses_id'],
-        participant: json['with'],
-      );
+
+  List<int>? participant_list;
+  List<User?>? participants;
+
+  MeetingModel({this.meeting_date,this.start_at,this.meeting_status,this.updated_at,
+    this.created_at,this.id,this.participants,this.participant_list
+  });
+  factory MeetingModel.fromJson(Map <String,dynamic> json) => _$MeetingModelFromJson(json);
+  Map<String, dynamic> toJson() => _$MeetingModelToJson(this);
 }
