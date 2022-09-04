@@ -51,7 +51,7 @@ class LDetailsTask extends StatelessWidget {
                         ,
                         style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(height: 15,),
                       Text(
 
                         '${snapShot.data!.description}'
@@ -62,13 +62,15 @@ class LDetailsTask extends StatelessWidget {
                             color:Colors.grey[700]
                         ),
                       ),
-                      SizedBox(height: 20,),
+
 
 
 
 
 
                       Container(
+                        margin: EdgeInsets.only(top:35,bottom:40),
+
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -108,7 +110,7 @@ class LDetailsTask extends StatelessWidget {
 
 
 
-                      SizedBox(height: 35,),
+
 
 
                       Text('The SubTasks of this task',style: TextStyle(color:Colors.blue,fontWeight: FontWeight.bold,fontSize: 15))
