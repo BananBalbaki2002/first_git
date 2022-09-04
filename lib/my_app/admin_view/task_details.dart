@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasko/controllers/task_controller.dart';
 import 'package:tasko/my_app/constants.dart';
+import 'package:tasko/my_app/sub_task_dec/admin_sub_task.dart';
 import 'package:tasko/my_models/task_model.dart';
 
 
@@ -47,7 +48,7 @@ class TaskDetail extends StatelessWidget {
                         ,
                         style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(height: 15,),
                       Text(
 
                         '${snapShot.data!.description}'
@@ -58,13 +59,14 @@ class TaskDetail extends StatelessWidget {
                             color:Colors.grey[700]
                         ),
                       ),
-                      SizedBox(height: 20,),
+
 
 
 
 
 
                       Container(
+                        margin: EdgeInsets.only(top:35,bottom:40),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -104,7 +106,7 @@ class TaskDetail extends StatelessWidget {
 
 
 
-                      SizedBox(height: 35,),
+
 
 
                       Text('The SubTasks of this task',style: TextStyle(color:Colors.blue,fontWeight: FontWeight.bold,fontSize: 15))
@@ -123,7 +125,22 @@ class TaskDetail extends StatelessWidget {
                               itemCount: snapShot.data!.subtasks!.length,
                               itemBuilder: (context, index) =>
                                   GestureDetector(
+
+
+                                    onTap: (){
+
+
+                                      Navigator.of(context).push(                                                         //new
+                                          new MaterialPageRoute(                                                                       //new
+                                              settings: const RouteSettings(name: '/a_subtask'),                                              //new
+                                              builder: (context) => new ASubTask(id:  snapShot.data!.subtasks![index]!.id as int,) //new
+                                          )                                                                                            //new
+                                      );
+
+                                    },
+
                                     child: Column(children: [
+
                                       Container(height: size.height*0.14,width: double.infinity,
                                           padding: EdgeInsets.fromLTRB(10,15,10,8),
 

@@ -3,9 +3,12 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:tasko/controllers/task_controller.dart';
 import 'package:tasko/my_app/constants.dart';
+import 'package:tasko/my_app/sub_task_dec/led_sub_task.dart';
+import 'package:tasko/my_app/sub_task_dec/mem_sub_task.dart';
 import 'package:tasko/my_models/task_model.dart';
 
 import 'add_attachement.dart';
@@ -124,6 +127,44 @@ class LDetailsTask extends StatelessWidget {
                               itemCount: snapShot.data!.subtasks!.length,
                               itemBuilder: (context, index) =>
                                   GestureDetector(
+
+                                    onTap: () async {
+
+                                      int role_id = await GetStorage().read(
+                                          'role_id');
+                                      if (role_id == 2) {
+
+                                        Navigator.of(context).push(                                                         //new
+                                            new MaterialPageRoute(                                                                       //new
+                                                settings: const RouteSettings(name:  '/l_subtask'),                                              //new
+                                                builder: (context) => new LeaderSubTask(id:  snapShot.data!.subtasks![index]!.id as int,) //new
+                                            )                                                                                            //new
+                                        );
+
+                                      }
+                                      else if(role_id == 3){
+                                        Navigator.of(context).push(                                                         //new
+                                            new MaterialPageRoute(                                                                       //new
+                                                settings: const RouteSettings(name: '/msubtask'),                                              //new
+                                                builder: (context) => new MemSubTask(id: snapShot.data!.subtasks![index]!.id as int) //new
+                                            )                                                                                            //new
+                                        );
+
+
+
+
+                                      }
+
+
+
+
+
+
+
+                                    },
+
+
+
                                     child: Column(children: [
                                       Container(height: size.height*0.14,width: double.infinity,
                                           padding: EdgeInsets.fromLTRB(10,15,10,8),
