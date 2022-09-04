@@ -78,4 +78,31 @@ static String showAllStatus='api/show2';
 static String showAllAttachement='api/task/show/my/attachment';
 static String fAddAttachement='api/task/';
 static String sAddAttachement='/attachment/add';
+
+
+
+
+  // static String addSubtask='api/leader/task/1/subtask/create';
+  //status for subatsk
+  static String showSubStatuses='api/show2';
+  //priority for subatsk
+  static String showSubPriorites='api/show3';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

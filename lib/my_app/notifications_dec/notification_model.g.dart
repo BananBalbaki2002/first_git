@@ -15,7 +15,7 @@ NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) {
     data: json['data'] == null
         ? null
         : LDataModel.fromJson(json['data'] as Map<String, dynamic>),
-  );
+  )..readed = json['readed'] as bool;
 }
 
 Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
@@ -24,5 +24,6 @@ Map<String, dynamic> _$NotificationModelToJson(NotificationModel instance) =>
       'type': instance.type,
       'notifiable_type': instance.notifiable_type,
       'notifiable_id': instance.notifiable_id,
+      'readed': instance.readed,
       'data': instance.data?.toJson(),
     };

@@ -164,23 +164,7 @@ class _AddTaskState extends State<AddTask> {
 
                 SizedBox(height: 40,),
 
-                CustomButton(height: 50, width: 180, buttonName: 'Save ',
-                    buttonColor:Colors.blue,fontSize: 18, onTap: ()async{
-                      final isValid=widget._formKey.currentState!.validate();
-                      if(isValid == true) {
-                        EasyLoading.show(status: 'loading...');
-                        await taskController.onClickAddTask();
 
-                        if (taskController.addedTask != null) {
-                          EasyLoading.showSuccess('new task is added');
-                          Navigator.of(context).pop();
-                        }
-                        else {
-                          EasyLoading.showError('can not add ');
-                        }
-                      }
-
-                    })
 
               ]
 
@@ -189,6 +173,27 @@ class _AddTaskState extends State<AddTask> {
             ),
           )
       ),
+
+
+
+
+      floatingActionButton: FloatingActionButton(backgroundColor:Colors.purple,
+        onPressed: ()async{
+
+          final isValid=widget._formKey.currentState!.validate();
+          if(isValid == true) {
+            EasyLoading.show(status: 'loading...');
+            await taskController.onClickAddTask();
+
+            if (taskController.addedTask != null) {
+              EasyLoading.showSuccess('new task is added');
+              Navigator.of(context).pop();
+            }
+            else {
+              EasyLoading.showError('can not add ');
+            }
+          }
+        },child: Icon(Icons.check_outlined),) ,
 
     );
   }

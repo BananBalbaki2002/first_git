@@ -13,7 +13,7 @@ class ModelSubTask {
   var status_id;
   var task_id;
 List<User?>? users;
-
+  List<int>? participants;
 
   ModelSubTask(
       {this.priority_id,
@@ -24,7 +24,8 @@ List<User?>? users;
       this.title,
       this.end_at,
       this.task_id,
-this.users
+this.users,
+        this.participants
       });
 
   factory ModelSubTask.fromJson(Map <String,dynamic> json) => _$ModelSubTaskFromJson(json);

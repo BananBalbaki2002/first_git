@@ -10,6 +10,8 @@ import 'package:tasko/my_app/constants.dart';
 import 'package:tasko/my_app/notifications_dec/data_model.dart';
 import 'package:tasko/my_app/notifications_dec/notification_controller.dart';
 import 'package:tasko/my_app/notifications_dec/notification_model.dart';
+import 'package:tasko/my_app/sub_task_dec/led_sub_task.dart';
+import 'package:tasko/my_app/sub_task_dec/mem_sub_task.dart';
 import 'package:tasko/my_app/team_leader_view/led_screens/leader_meeting.dart';
 
 class NotificationsScre extends StatefulWidget {
@@ -171,19 +173,39 @@ controller.id_notification=snapShot.data![index].id;
 print('suntask');
 print(controller.l_title[index].title[0]['id']);
 
-
-
-
 int role_id = await GetStorage().read(
     'role_id');
 if (role_id == 2) {
-  //Navigator.pushNamed(context, '/l_subtask');
+print('role==2');
+Navigator.of(context).push(                                                         //new
+    new MaterialPageRoute(                                                                       //new
+        settings: const RouteSettings(name: '/l_subtask'),                                              //new
+        builder: (context) => new LeaderSubTask(id: controller.l_title[index].title[0]['id'] as int,) //new
+    )                                                                                            //new
+);
+
 }
-else if(role_id ==3){
- // Navigator.pushNamed(context,  '/msubtask');
+else if(role_id == 3){
+  print('role_id ==3');
+
+
+  Navigator.of(context).push(                                                         //new
+      new MaterialPageRoute(                                                                       //new
+          settings: const RouteSettings(name: '/msubtask'),                                              //new
+          builder: (context) => new MemSubTask(id: controller.l_title[index].title[0]['id'] as int,) //new
+      )                                                                                            //new
+  );
+
+
+
+
 }
 
                             }
+
+
+
+
 
 
 

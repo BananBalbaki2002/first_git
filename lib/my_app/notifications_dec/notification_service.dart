@@ -36,7 +36,7 @@ static List<LDataModel> n_title=[];
 
     Map<String, dynamic> json = jsonDecode(response.body);
 
-    print(response.body);
+
     print(response.statusCode);
 
     List<LDataModel> list_data_notification=[];
@@ -87,16 +87,16 @@ return list_notification;
 
     Map<String, dynamic> json = jsonDecode(response.body);
 
-    print(response.body);
+
     print(response.statusCode);
 
     List<LDataModel> list_data_notification=[];
     NotificationModel notificationModel;
     List<NotificationModel> list_notification=[];
 
-    print(json['the notification that you read']);
 
-print(json['the notification that you read'].length);
+
+
     for (int i = 0; i < json['the notification that you read'].length; i++) {
 
       list_data_notification.add(LDataModel.fromJson(json['the notification that you read'][i]['data']));
@@ -108,9 +108,8 @@ print(json['the notification that you read'].length);
       );
       list_notification.add(notificationModel);
 
-      print(list_notification[0].data!.note);
-      print(list_notification[0].data!.title);
-      print(list_notification[0].id);
+     // print(list_notification[0].data!.note);
+
 
       json['the notification that you read'][i]['data'].forEach((k, v) {
         if(k != 'note'){
@@ -121,10 +120,10 @@ print(json['the notification that you read'].length);
 
     }
 
-    print(list_data_notification[0].title);
-    print('the titl');
-    print(n_title[0].note); //title
-    print(n_title[0].title);
+  //  print(list_data_notification[0].title);
+
+   // print(n_title[0].note); //title
+
 
 
 

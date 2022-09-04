@@ -30,6 +30,9 @@ import 'my_app/notifications_dec/notification_controller.dart';
 import 'my_app/search_widg/search_page.dart';
 import 'controllers/statistics_controller.dart';
 import 'my_app/admin_view/statistics_screen.dart';
+import 'my_app/sub_task_dec/admin_sub_task.dart';
+import 'my_app/sub_task_dec/led_sub_task.dart';
+import 'my_app/sub_task_dec/mem_sub_task.dart';
 import 'my_app/team_leader_view/led_screens/add_attachement.dart';
 import 'my_app/team_leader_view/attachement_controller.dart';
 import 'my_app/team_leader_view/led_screens/comments.dart';
@@ -98,9 +101,9 @@ class MyApp extends StatelessWidget {
 '/MTaskScr':(context)=>MTaskScr(),
         '/LedTaskScreen':(context)=>LedTaskScreen(),
 '/user':(context)=>UserScreen(),
-        // '/a_subtask':(context){return ASubTask();},
-        // '/l_subtask':(context){return LeaderSubTask();},
-        // '/msubtask':(context){return MemSubTask();},
+        '/a_subtask':(context)=>  ASubTask(),
+        '/l_subtask':(context)=> LeaderSubTask(),
+        '/msubtask':(context)=> MemSubTask(),
         '/MStatisticsScre':(context)=>MStatisticsScre(),
         '/NotificationsScre':(context)=>NotificationsScre(),
 '/DashboardTeamLeader':(context)=>DashboardTeamLeader(),
