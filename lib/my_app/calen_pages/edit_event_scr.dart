@@ -68,7 +68,6 @@ class _EditEventScrState extends State<EditEventScr> {
                 ),
                 height: MediaQuery.of(context).size.height * 0.07,
                 allBorder:true,
-                validator: (title)=> title !=null && title.isEmpty ? 'Date Field Cannot be empty ':null ,
 
                 hintText: DateFormat.yMd().format(pro.selectedStartDate), isPassword: false,
                 hintColor: Colors.grey[700],

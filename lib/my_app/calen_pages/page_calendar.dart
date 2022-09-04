@@ -161,10 +161,13 @@ _DataSource _getDataSource(List<ModelCalendar> bEvents) {
 
 
     DateTime s=DateTime.parse(bEvents[i].date_of_event);
+    var startDate= DateTime(s.year,s.month,s.day,DateTime.now().hour,DateTime.now().minute,DateTime.now().second)
+;
+
     appointments.add(Appointment(
-      startTime:DateTime(s.year,s.month,s.day,DateTime.now().hour,DateTime.now().minute,DateTime.now().second)
+      startTime:startDate
       ,
-      endTime:DateTime(s.year,s.month,s.day,0,0,0),
+      endTime:startDate.add(Duration(hours: 1 )),
       subject: bEvents[i].event_name,
       color: Colors.purple,) );
 

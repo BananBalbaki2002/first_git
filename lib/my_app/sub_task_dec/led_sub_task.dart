@@ -124,7 +124,10 @@ class LeaderSubTask extends StatelessWidget {
                                     TextButton( onPressed: () { Navigator.pushReplacementNamed(
                                         context, '/editsubtask');
 
-                                    }, child: Text('edit',style: TextStyle(fontWeight: FontWeight.bold,fontSize: size.width*0.05,color: appCo),))
+                                    }, child:
+
+
+                                    Text('edit',style: TextStyle(fontWeight: FontWeight.bold,fontSize: size.width*0.05,color: appCo),))
 
                                   ],
                                 ),

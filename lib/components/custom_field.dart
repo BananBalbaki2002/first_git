@@ -32,7 +32,7 @@ this.iconWidget,
   this.keyboard,
   this.colorField,
   this.prefixIcon,
-required this.validator
+ this.validator
 
 
 });
