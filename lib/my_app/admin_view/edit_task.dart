@@ -82,7 +82,6 @@ class _EditTaskState extends State<EditTask> {
 
 //-------------------start_date------------------------
                 InputField(widget: CustomField(
-                  validator: (title)=> title !=null && title.isEmpty ? 'Title Cannot be empty ':null ,
 
                   iconWidget: IconButton(
                     icon:Icon(Icons.calendar_today_outlined,
@@ -105,7 +104,6 @@ class _EditTaskState extends State<EditTask> {
 
 //------------------------------endDate----------------------
                 InputField(widget: CustomField(
-                  validator: (title)=> title !=null && title.isEmpty ? 'Title Cannot be empty ':null ,
 
                   iconWidget: IconButton(
                       icon:Icon(Icons.calendar_today_outlined),

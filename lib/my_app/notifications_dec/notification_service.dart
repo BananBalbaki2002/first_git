@@ -66,7 +66,6 @@ List<NotificationModel> list_notification=[];
 
     }
     // print(list_data_notification[0].title);
-    // print('the titl');
     // print(n_title[0].note); //title
     // print(n_title[0].title);// the value of title
 

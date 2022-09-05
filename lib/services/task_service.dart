@@ -181,14 +181,14 @@ print(id_task);
 
 
     List< Task > models = [];
-    print(response.body);
+
     print(response.statusCode);
-    print(json);
+
 
     for(var us in json ){
       print(us);
       models.add(Task.fromJson(us));}
-    print(models);
+
     return models;
 
   }

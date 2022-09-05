@@ -87,7 +87,7 @@ class _AddTaskState extends State<AddTask> {
                   ),
                   height: MediaQuery.of(context).size.height * 0.07,
                   allBorder:true,
-                  validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
 
                   hintText: DateFormat.yMd().format(taskController.selectedStartDate), isPassword: false,
                   hintColor: Colors.grey[700],
@@ -111,7 +111,7 @@ class _AddTaskState extends State<AddTask> {
                   allBorder:true,
                   hintText: DateFormat.yMd().format(taskController.selectedEndDate),
                   isPassword: false,
-                  validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
 
                   hintColor: Colors.grey[700],
                   colorField: Colors.grey[100],)

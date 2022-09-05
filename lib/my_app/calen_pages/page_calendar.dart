@@ -171,9 +171,9 @@ _DataSource _getDataSource(List<ModelCalendar> bEvents) {
       subject: bEvents[i].event_name,
       color: Colors.purple,) );
 
-//print(bEvents[i].event_name);
 
-    print(bEvents[i].date_of_event);
+
+//    print(bEvents[i].date_of_event);
 
   }
 
