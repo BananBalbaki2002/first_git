@@ -89,8 +89,9 @@ static String sAddAttachement='/attachment/add';
   static String showSubPriorites='api/show3';
 
 
-
-
+//----------------------Comments-----------------
+static String showMyComments='api/task/show/my/comments';
+static String showAllComment='api/task/show/comments/';
 
 
 

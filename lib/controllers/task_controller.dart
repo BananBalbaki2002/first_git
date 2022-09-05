@@ -134,6 +134,7 @@ var message;
 //--------------ShowAllTask-------------------------------------
 
 Future<List<Task>> onClickshowTasks()async{
+    await fetchStates();
       list_of_tasks = await TaskService.servAllTasks();
 
   return list_of_tasks;

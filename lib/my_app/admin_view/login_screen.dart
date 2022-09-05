@@ -60,7 +60,7 @@ UserController  userController=UserController();
                           height: 28,
                         ),
                         CustomField(
-                            validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
 
                             height: 65,
                             hintColor: Colors.grey[700],
@@ -74,7 +74,7 @@ UserController  userController=UserController();
                           height: 18,
                         ),
                         CustomField(
-                            validator: (title)=> title !=null && title.isEmpty ? 'Title Cannot be empty ':null ,
+
 
                             allBorder: false,
                             hintColor: Colors.grey[700],

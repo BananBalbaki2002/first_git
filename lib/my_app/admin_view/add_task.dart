@@ -50,7 +50,6 @@ class _AddTaskState extends State<AddTask> {
 
                   height: MediaQuery.of(context).size.height * 0.07,
                   allBorder:true,hintText:'Title',
-                  validator: (title)=> title !=null && title.isEmpty ? 'Title Cannot be empty ':null ,
 
                   hintColor: Colors.grey[700],
                   isPassword: false,
@@ -67,7 +66,6 @@ class _AddTaskState extends State<AddTask> {
                   height: MediaQuery.of(context).size.height * 0.07,
                   allBorder:true,hintText:'Descroption', isPassword: false,
                   controller:taskController.descriptionController,
-                  validator: (title)=> title !=null && title.isEmpty ? 'Description Cannot be empty ':null ,
 
                   hintColor: Colors.grey[700],
                   colorField: Colors.grey[100],)
@@ -180,18 +178,15 @@ class _AddTaskState extends State<AddTask> {
       floatingActionButton: FloatingActionButton(backgroundColor:Colors.purple,
         onPressed: ()async{
 
-          final isValid=widget._formKey.currentState!.validate();
-          if(isValid == true) {
-            EasyLoading.show(status: 'loading...');
-            await taskController.onClickAddTask();
+          EasyLoading.show(status: 'loading...');
+          await taskController.onClickAddTask();
 
-            if (taskController.addedTask != null) {
-              EasyLoading.showSuccess('new task is added');
-              Navigator.of(context).pop();
-            }
-            else {
-              EasyLoading.showError('can not add ');
-            }
+          if (taskController.addedTask != null) {
+            EasyLoading.showSuccess('new task is added');
+            Navigator.of(context).pop();
+          }
+          else {
+            EasyLoading.showError('can not add ');
           }
         },child: Icon(Icons.check_outlined),) ,
 

@@ -42,6 +42,7 @@ class UserService{
     );
 
     Map<String,dynamic> json=jsonDecode(response.body);
+    print(json);
     print(response.statusCode);
     if(json['the user is:'] == null)
       return null;

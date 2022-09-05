@@ -52,7 +52,6 @@ class _EditUserState extends State<EditUser> {
                 ),
                 //---------fname-------------------------------------
                 InputField(widget: CustomField(
-                  validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
 
                   height: MediaQuery.of(context).size.height * 0.07,
                   allBorder:true,hintText:'First_Name',
@@ -64,7 +63,7 @@ class _EditUserState extends State<EditUser> {
                     , title: 'First_Name'),
 
                 InputField(widget: CustomField(
-                  validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
 
                   height: MediaQuery.of(context).size.height * 0.07,
                   allBorder:true,hintText:'Last_Name', isPassword: false,
@@ -75,7 +74,7 @@ class _EditUserState extends State<EditUser> {
 
 
                 InputField(widget: CustomField(
-                  validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
 
                   keyboard:TextInputType.emailAddress,
                   height: MediaQuery.of(context).size.height * 0.07, allBorder:true,
@@ -86,7 +85,7 @@ class _EditUserState extends State<EditUser> {
 
                 InputField(
                     widget: CustomField(
-                      validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
 
                       keyboard:TextInputType.visiblePassword,
                   height: MediaQuery.of(context).size.height * 0.07,
@@ -98,7 +97,7 @@ class _EditUserState extends State<EditUser> {
 
 
                 InputField(widget: CustomField(
-                  validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
                   keyboard:TextInputType.number,
                   height: MediaQuery.of(context).size.height * 0.07, allBorder:true,
                   hintText:'Employee_Identical', isPassword: false,
@@ -110,7 +109,6 @@ class _EditUserState extends State<EditUser> {
 
                 InputField(widget:
                 CustomField(
-                  validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
 
                   iconWidget:
 
@@ -202,10 +200,6 @@ class _EditUserState extends State<EditUser> {
 
       floatingActionButton: FloatingActionButton(backgroundColor:Colors.purple,onPressed: ()async{
 
-    final isValid=widget._formKey.currentState!.validate();
-// if found title
-    if(isValid == true) {
-
         EasyLoading.show(status: 'loading...');
         await model.onClickEditUser();
 
@@ -217,7 +211,7 @@ class _EditUserState extends State<EditUser> {
         }
         else {
           EasyLoading.showError('can not edit ');
-        }}
+        }
 
 
 

@@ -35,10 +35,20 @@ int? selectedIdRole;
 
     );
 
+    print( fnameController.text);
+    print( lnameController.text);
+    print( emailController.text);
+    print(  idController.text);
+    print(  passwordController.text);
+    print( selectedIdRole.toString());
+    print( selectedIdTeam.toString());
+
 
     addedUser = await UserService.addUser(user);
     list_of_Users.add(addedUser);
     notifyListeners();
+
+
   }
 //--------------EditeUser---------------------
 

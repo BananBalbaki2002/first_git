@@ -56,7 +56,7 @@ class _EditTaskState extends State<EditTask> {
 
                 //---------TitleTask-------------------------------------
                 InputField(widget: CustomField(
-                  validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
 
                   height: MediaQuery.of(context).size.height * 0.07,
                   allBorder:true,hintText:'Title',
@@ -71,7 +71,7 @@ class _EditTaskState extends State<EditTask> {
 
 //------------------------------description-----------------------------
                 InputField(widget: CustomField(
-                  validator: (title)=> title !=null && title.isEmpty ? 'Title Cannot be empty ':null ,
+
 
                   height: MediaQuery.of(context).size.height * 0.07,
                   allBorder:true,hintText:'Descroption', isPassword: false,
@@ -166,7 +166,6 @@ class _EditTaskState extends State<EditTask> {
 //------------------------------StatusID----------------------------------
                 InputField(widget:
                 CustomField(
-                  validator: (title)=> title !=null && title.isEmpty ? 'Title Cannot be empty ':null ,
 
                   iconWidget:
 
@@ -205,12 +204,6 @@ class _EditTaskState extends State<EditTask> {
                 SizedBox(height: 40,),
                 CustomButton(height: 50, width: 180, buttonName: 'Save ',
                     buttonColor:Colors.blue,fontSize: 18, onTap: ()async{
-    final isValid=widget._formKey.currentState!.validate();
-// if found title
-    if(isValid == true) {
-
-
-
                       EasyLoading.show(status: 'loading...');
                       await taskController.onClickEditTask();
 
@@ -222,7 +215,7 @@ class _EditTaskState extends State<EditTask> {
                       }
                       else {
                         EasyLoading.showError('can not edit ');
-                      }}
+                      }
 
 
 

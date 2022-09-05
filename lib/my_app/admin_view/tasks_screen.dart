@@ -298,13 +298,16 @@ class ttaskList extends StatelessWidget {
                 CupertinoAlertDialog(
                   title: Text(
                     ' Are you sure about deleting?',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 15),
                   ),
-                  content: Text(
-                    'This will completely delete the task',
-                    style: TextStyle(fontSize: 16),
-                  ),
+
                   actions: [
+                    CupertinoDialogAction(
+                      child: Text('Cancel'),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
                     CupertinoDialogAction(
                       child:
                       Text('OK'),
@@ -319,12 +322,7 @@ class ttaskList extends StatelessWidget {
                         Navigator.pop(context);
                       },
                     ),
-                    CupertinoDialogAction(
-                      child: Text('Cancel'),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    )
+
                   ],
                 )
 

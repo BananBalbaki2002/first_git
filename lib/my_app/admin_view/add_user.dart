@@ -49,7 +49,7 @@ class _AddUserState extends State<AddUser> {
 
               //---------fname-------------------------------------
               InputField(widget: CustomField(
-                validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
 
                 height: MediaQuery.of(context).size.height * 0.07,
                 allBorder:true,hintText:'First_Name',
@@ -61,7 +61,7 @@ class _AddUserState extends State<AddUser> {
                   , title: 'First_Name'),
 
               InputField(widget: CustomField(
-                validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
 
                 height: MediaQuery.of(context).size.height * 0.07,
                 allBorder:true,hintText:'Last_Name', isPassword: false,
@@ -72,7 +72,7 @@ class _AddUserState extends State<AddUser> {
 
 
               InputField(widget: CustomField(
-                validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
 
                 keyboard:TextInputType.emailAddress,
                 height: MediaQuery.of(context).size.height * 0.07, allBorder:true,
@@ -82,7 +82,7 @@ class _AddUserState extends State<AddUser> {
                   , title: 'Email'),
 
               InputField(widget: CustomField(
-                validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
 
                 keyboard:TextInputType.visiblePassword,
                 height: MediaQuery.of(context).size.height * 0.07,
@@ -94,7 +94,6 @@ class _AddUserState extends State<AddUser> {
 
 
               InputField(widget: CustomField(
-                validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
 
                 keyboard:TextInputType.number,
                 height: MediaQuery.of(context).size.height * 0.07, allBorder:true,
@@ -107,7 +106,7 @@ class _AddUserState extends State<AddUser> {
 
               InputField(widget:
               CustomField(
-                validator: (title)=> title !=null && title.isEmpty ? ' Cannot be empty ':null ,
+
 
                 iconWidget:
 
@@ -199,20 +198,16 @@ class _AddUserState extends State<AddUser> {
 
       floatingActionButton: FloatingActionButton(backgroundColor:Colors.purple,
         onPressed: ()async{
-    final isValid=widget._formKey.currentState!.validate();
-// if found title
-    if(isValid == true) {
-      EasyLoading.show(status: 'loading...');
-      await userController.onClickAddUser();
+          EasyLoading.show(status: 'loading...');
+          await userController.onClickAddUser();
 
-      if (userController.addedUser != null) {
-        EasyLoading.showSuccess('new user is added');
-        Navigator.of(context).pop();
-      }
-      else {
-        EasyLoading.showError('can not add ');
-      }
-    }
+          if (userController.addedUser != null) {
+            EasyLoading.showSuccess('new user is added');
+            Navigator.of(context).pop();
+          }
+          else {
+            EasyLoading.showError('can not add ');
+          }
 
       },child: Icon(Icons.check_outlined),) ,
 
