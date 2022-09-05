@@ -36,8 +36,7 @@ UserController  userController=UserController();
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.pop(
-                                  context,
+                                Navigator.pushNamed(context,'/OnBarding'
                                 );
                               },
                               icon: Icon(Icons.arrow_back_ios_outlined),

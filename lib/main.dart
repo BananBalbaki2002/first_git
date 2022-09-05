@@ -87,6 +87,7 @@ class MyApp extends StatelessWidget {
       routes: {
 
         '/login': (context) => Login(),
+        '/OnBarding':(context)=>OnBarding(),
         '/Dashboard': (context) => Dashboard(),
         '/TaskScre': (context) => TaskScre(),
         '/AddUser':(context) => AddUser(),
