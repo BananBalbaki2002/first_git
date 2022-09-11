@@ -61,6 +61,7 @@ HttpHeaders.authorizationHeader: 'Bearer ${GetStorage().read('token')}',
 var  json=jsonDecode(response.body);
     print(await GetStorage().read('token'));
 await GetStorage().remove('token');
+
 print('the message is ');
 print(json['message']);
 

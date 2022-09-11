@@ -19,16 +19,16 @@ const kDefaultShadow=BoxShadow(
 
 );
 //---------------------------CustomAppBar------------------------------
-AppBar buildAppBar({IconData? prefixIcon,var onPressedPre,var onPressedSuf,
-  required String text,IconData? suffixIcon,Color? color,bool? centerTitle}) {
+AppBar buildAppBar({var prefixIcon,var onPressedPre,var onPressedSuf,
+  required String text,IconData? suffixIcon,Color? color,bool? centerTitle,Colors? colorIcon}) {
   return AppBar(
     elevation: 0,
     centerTitle: centerTitle ==null ? true : centerTitle,
     backgroundColor: color == null ? Colors.transparent: color,
-    leading: prefixIcon == null ?Container():GestureDetector(child: Icon(prefixIcon),
+    leading: prefixIcon != null ?GestureDetector(child: Icon(prefixIcon),
     onTap: onPressedPre ,
 
-    ),
+    ):null,
     title: Text(
       text,
       style: GoogleFonts.chewy(textStyle:const TextStyle(fontWeight: FontWeight.w100,color: appFo,fontSize: 27, letterSpacing: .5))
@@ -41,6 +41,7 @@ AppBar buildAppBar({IconData? prefixIcon,var onPressedPre,var onPressedSuf,
     ],
   );
 }
+double r=30;
 //------------------
 const Color appCo=Colors.blue;
 const MaterialColor appCol=Colors.blue;

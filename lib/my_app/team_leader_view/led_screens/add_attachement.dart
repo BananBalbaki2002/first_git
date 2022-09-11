@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:tasko/my_app/admin_view/add_user.dart';
 
 import '../../constants.dart';
-import '../attachement_controller.dart';
+import '../../../controllers/attachement_controller.dart';
 
 class AddAttachement extends StatelessWidget {
   final _formKey=GlobalKey<FormState>();

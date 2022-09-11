@@ -70,12 +70,15 @@ var id;
                               ,style: TextStyle(fontSize: 20),),);
                           }
                           else{
-                            return Column(
+                            return
+                              Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Stack(
                                     alignment: AlignmentDirectional.bottomCenter,
-                                    children: [Column(
+                                    children: [
+
+                                      Column(
                                       children: [
                                         Container(
                                             height: size.height*0.25,

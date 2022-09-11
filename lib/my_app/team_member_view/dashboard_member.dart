@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:tasko/controllers/login_controller.dart';
 import 'package:tasko/controllers/user_controller.dart';
+import 'package:tasko/my_app/comment_dec/comment_controller.dart';
+import 'package:tasko/my_app/comment_dec/comment_service.dart';
 
 import '../constants.dart';
 
@@ -49,25 +52,8 @@ class DashboardMember extends StatelessWidget {
     return  Scaffold(
       backgroundColor:Colors.blue,
       appBar: buildAppBar(text: 'Dashboard', suffixIcon:Icons.notifications_outlined,
-          prefixIcon: Icons.menu,onPressedPre: ()async{
 
 
-            EasyLoading.show(status: 'Loading....');
-
-            await loginController.onClickLogout();
-
-            Navigator.pushReplacementNamed(
-                context, '/login');
-            EasyLoading.showSuccess(loginController.message);
-
-
-
-
-          },
-          onPressedSuf: ()async{
-            Navigator.pushNamed(context,'/NotificationsScre');
-
-          }
 
 
       ),
@@ -100,7 +86,90 @@ class DashboardMember extends StatelessWidget {
 
         ),
       ),
+      drawer: Drawer(
+          child: ListView(scrollDirection: Axis.vertical, children: [
+            DrawerHeader(
+                padding: EdgeInsets.zero,
+                child: Stack(
+                  children: [
+                    Container(
+                      color: Colors.blue,
+                    ),
 
+
+                    Padding(
+                      padding: const EdgeInsets.only(top:20.0,left: 10,bottom: 10),
+                      child:
+
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+
+
+
+
+                          CircleAvatar(
+                              radius: 35,
+                              backgroundColor: Colors.white,
+                              child:Center(child:
+                              Text('${GetStorage().read('first_name')[0].toUpperCase()+
+                                  GetStorage().read('last_name')[0].toUpperCase()}',style: TextStyle(color: Colors.blue,fontSize: 20,fontWeight: FontWeight.w500),))
+
+
+                          )
+                          ,
+
+
+                          Spacer(),
+                          Column(crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(children: [
+                                Text('${GetStorage().read('first_name')}',style: TextStyle(color: Colors.white,fontSize: 15),),
+                                SizedBox(width: 5,),
+                                Text('${GetStorage().read('last_name')}',style: TextStyle(color: Colors.white,fontSize: 15),),
+                              ],),
+                              SizedBox(height: 5,),
+                              Text('${GetStorage().read('email')}',style: TextStyle(color: Colors.white70),),
+
+
+                            ],
+
+                          )
+                        ],),
+                    )
+
+                  ],
+                )),
+            GetStorage().read('has_profile')
+                ? ListTile(
+              title: Text(' My Profile'),
+              leading: Icon(Icons.person_outline),
+              onTap: () {
+                Navigator.pushNamed(context, '/MProfileScr');
+              },
+            )
+                : ListTile(
+              title: Text('Add Profile'),
+              leading: Icon(Icons.person_outline),
+              onTap: () {
+
+                Navigator.pushNamed(context, '/MAddProfile');
+              },
+            ),
+            ListTile(
+              title: Text('Logout'),
+              leading: Icon(Icons.logout_outlined),
+              onTap: () async {
+                EasyLoading.show(status: 'Loading....');
+
+                await loginController.onClickLogout();
+
+                Navigator.pushReplacementNamed(context, '/login');
+                EasyLoading.showSuccess(loginController.message);
+              },
+            ),
+          ])),
 
 
 

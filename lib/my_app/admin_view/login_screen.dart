@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tasko/components/custom_button.dart';
 import 'package:tasko/components/custom_field.dart';
+import 'package:tasko/config/server_config.dart';
 import 'package:tasko/controllers/login_controller.dart';
+
 import 'package:tasko/controllers/task_controller.dart';
 import 'package:tasko/controllers/user_controller.dart';
+import 'package:tasko/my_app/profile_dec/profile_controller.dart';
 import 'package:tasko/my_models/user_model.dart';
 import 'package:tasko/services/auth_service.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -15,6 +18,7 @@ import 'package:provider/provider.dart';
 class Login extends StatelessWidget {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   LoginController loginController = LoginController();
+  ProfileController profileController=ProfileController();
   TaskController  taskController=TaskController();
 UserController  userController=UserController();
 
@@ -107,6 +111,24 @@ UserController  userController=UserController();
                                     EasyLoading.showSuccess('sing up is done.');
 
 
+
+                                    //-----------------------FIRST NAME--------------
+                                    await GetStorage().write('first_name',
+
+                                        loginController.modelUser!.first_name
+                                    );
+                                    //--------------------LAST NAME----------------
+                                    await GetStorage().write('last_name',
+
+                                        loginController.modelUser!.last_name
+                                    );
+                                    //-----------------Email------------------
+                                    await GetStorage().write('email',
+
+                                        loginController.modelUser!.email
+                                    );
+
+
                                     await GetStorage().write('role_id',
                                         loginController.modelUser!.role_id);
                                     int role_id = await GetStorage().read(
@@ -116,27 +138,43 @@ UserController  userController=UserController();
                                       Navigator.pushReplacementNamed(
                                           context, '/Dashboard');
                                     }
-                                    else if (role_id == 2) {
+
+
+
+
+                                      if (role_id == 2) {
                                       print('2');
+                                      //---------------------IMG_PROFILE---------------
+                                   await   myFun();
+
+
                                       Navigator.pushReplacementNamed(
                                           context, '/DashboardTeamLeader');
                                     }
 
 
                                     else if (role_id == 3) {
-                                      print('2');
+                                      print('3');
+                                      //---------------------IMG_PROFILE---------------
+                                   await  myFun();
+
+
                                       Navigator.pushReplacementNamed(
                                           context, '/DashboardMember');
                                     }
 
 
                                     print('yes every things');
-                                  } else {
+                                  }
+
+                                  else {
                                     EasyLoading.showError(
                                       'error page',
                                     );
                                     print('there are errors ');
                                   }
+
+
                                 }
 
 
@@ -153,47 +191,28 @@ UserController  userController=UserController();
                       ]),
                     )))));
   }
+
+  Future myFun()async{
+
+    await profileController.LfetchProfile();
+
+    if(profileController.modelProfile.phone != null){ // found profile
+
+      await GetStorage().write('has_profile',true);
+
+    }
+    else{
+      await GetStorage().write('has_profile',false);
+
+
+    }
+
+
+  }
+
+
 }
 
 
 
-/*
 
-
-   GestureDetector(
-                          onTap: () async {
-                            EasyLoading.show(status: 'Loading....');
-                            //FocusScope.of(context).unfocus();
-                            await loginController.onClickLogin();
-
-                            if (loginController.modelUser != null) {
-                              EasyLoading.showSuccess('sing up is done.');
-                              Navigator.pushReplacementNamed(
-                                  context, '/Dashboard');
-                              print('yes every things');
-                            } else {
-                              EasyLoading.showError(
-                                'error page',
-                              );
-                              print('there are errors ');
-                            }
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: kblue,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Center(
-                                  child: Text(
-                                'LOGIN',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: size.width * 0.044,
-                                    fontWeight: FontWeight.w500),
-                              )),
-                            ),
-                          ),
-                        ),
-
- */

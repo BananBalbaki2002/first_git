@@ -43,6 +43,7 @@ class UserService{
 
     Map<String,dynamic> json=jsonDecode(response.body);
     print(json);
+    print(response.body);
     print(response.statusCode);
     if(json['the user is:'] == null)
       return null;
@@ -73,6 +74,7 @@ static Future editUser(User user,int id_user)async{
   );
 
   Map<String,dynamic> json=jsonDecode(response.body);
+  print(response.body);
   print(response.statusCode);
   if(json['the user is:'] == null)
     return null;
@@ -123,8 +125,9 @@ else
     print(response.statusCode);
     List users = json['the users'] ;
 
-    print(users);
+
     List<User> models = [];
+
     print(response.statusCode);
 
     for(int i=0 ;i<json['the users'].length;i++)

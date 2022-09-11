@@ -150,7 +150,7 @@ controller.id_notification=snapShot.data![index].id;
 
                             }
                             else if(controller.l_title[index].note == 'the meeting'){
-                              Navigator.of(context).pushReplacement(                                                         //new
+                              Navigator.of(context).push(                                                         //new
                                   new MaterialPageRoute(                                                                       //new
                                       settings: const RouteSettings(name: '/meeting_for_leader'),                                              //new
                                       builder: (context) => new MeetingForLeaderOm(id: controller.l_title[index].title[0]['id'],) //new

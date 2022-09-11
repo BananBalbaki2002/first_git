@@ -5,7 +5,7 @@ class ServerConfig{
 
 
 
-  static String  domainName='http://192.168.1.103:8000/';
+  static String  domainName='http://192.168.1.106:8000/';
 
   //------------Auth-------------------
   static String login='api/auth/login';
@@ -17,6 +17,7 @@ static String logout='api/logout';
 static String addUser='api/admin/user/add';
   static String editUser='api/admin/user/update/';
 static String deleteUser='api/admin/user/delete/';
+
 static String showUsers='api/admin/user/show/users';
 
 //------------------Task----------------------
@@ -92,9 +93,12 @@ static String sAddAttachement='/attachment/add';
 //----------------------Comments-----------------
 static String showMyComments='api/task/show/my/comments';
 static String showAllComment='api/task/show/comments/';
-
-
-
+//---------------PROFILE---------------------
+static String showLProfile='api/show/MyProfile';
+static String showAdedProfile='api/leader/create';
+static String showEditedProfile='api/leader/update/';
+static String showMEditedProfile='api/member/edit/';
+static String showMAdedProfile='api/member/create';
 
 
 

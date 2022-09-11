@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tasko/controllers/teams_controller.dart';
 import 'package:tasko/my_app/calen_pages/page_calendar.dart';
 
+
 import 'my_app/calen_pages/calendar_controller.dart';
 import 'controllers/login_controller.dart';
 import 'controllers/meeting_controller.dart';
@@ -26,15 +27,28 @@ import 'my_app/admin_view/edit_user.dart';
 import 'my_app/admin_view/add_task.dart';
 import 'my_app/calen_pages/all_event_scr.dart';
 import 'my_app/calen_pages/edit_event_scr.dart';
+import 'my_app/comment_dec/comment_controller.dart';
+import 'controllers/add_meeting_controller.dart';
 import 'my_app/notifications_dec/notification_controller.dart';
+import 'my_app/team_member_view/mem_add_profile.dart';
+import 'my_app/team_member_view/mem_edit_profile.dart';
+import 'my_app/team_member_view/mem_profile_scr.dart';
+import 'my_app/team_leader_view/led_screens/add_profile.dart';
+import 'my_app/team_leader_view/led_screens/edit_profile.dart';
+import 'my_app/profile_dec/profile_controller.dart';
+import 'my_app/team_leader_view/led_screens/profile_scr.dart';
 import 'my_app/search_widg/search_page.dart';
 import 'controllers/statistics_controller.dart';
 import 'my_app/admin_view/statistics_screen.dart';
+import 'my_app/sub_task_dec/add_subtask_controller.dart';
 import 'my_app/sub_task_dec/admin_sub_task.dart';
+import 'my_app/sub_task_dec/edit_subtask.dart';
+import 'my_app/sub_task_dec/edit_subtask_controller.dart';
 import 'my_app/sub_task_dec/led_sub_task.dart';
 import 'my_app/sub_task_dec/mem_sub_task.dart';
+import 'my_app/sub_task_dec/select_to_add_users.dart';
 import 'my_app/team_leader_view/led_screens/add_attachement.dart';
-import 'my_app/team_leader_view/attachement_controller.dart';
+import 'controllers/attachement_controller.dart';
 import 'my_app/team_leader_view/led_screens/comments.dart';
 import 'my_app/team_leader_view/led_screens/leader_meeting.dart';
 import 'my_app/team_leader_view/led_screens/leader_tasks_scre.dart';
@@ -75,8 +89,11 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) =>AttachementController()),
           ChangeNotifierProvider(create: (_) => NotificationController()),
           ChangeNotifierProvider(create: (_) => MyCalendarCont()),
-
-
+          ChangeNotifierProvider(create: (_) => CommentController()),
+          ChangeNotifierProvider(create: (_)=> AddSubtaskProvider()),
+          ChangeNotifierProvider(create: (_)=> EditSubtaskProvider()),
+          ChangeNotifierProvider(create: (_)=> AddMeetingProvider()),
+          ChangeNotifierProvider(create: (_) => ProfileController()),
 
         ],
       child:
@@ -117,11 +134,18 @@ class MyApp extends StatelessWidget {
         '/LDetailsTask':(context)=>LDetailsTask(),
         '/AddAttachement':(context)=> AddAttachement(),
         '/EditEvent':(context)=>EditEventScr(),
-
+        '/editsubtask':(context)=>EditSubtask(),
+        '/selectToEditSubtask':(context)=>SelectToAddUsers(),
+        '/AddProfile':(context)=>AddProfile(),
+        '/ProfileScr':(context)=>ProfileScr(),
+        '/EditProfile':(context)=>EditProfile(),
+        '/MProfileScr':(context)=>MProfileScr(),
+        '/MEditProfile':(context)=>MEditProfile(),
+        '/MAddProfile':(context)=>MAddProfile(),
 
        },
 
-//home:PageBanan(),
+//home:ProfileScr(),
 
  initialRoute: GetStorage().hasData('token') ?  fun() : '/login',
 

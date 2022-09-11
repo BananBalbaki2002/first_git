@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:tasko/controllers/task_controller.dart';
-import 'package:tasko/my_app/team_leader_view/attachement_service.dart';
+import 'package:tasko/services/attachement_service.dart';
 import 'package:tasko/my_models/attachement_model.dart';
 
 class AttachementController with ChangeNotifier{

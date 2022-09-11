@@ -23,7 +23,7 @@ int? selectedIdRole;
 
   //--------------AddUser---------------------
 
-  onClickAddUser() async {
+  Future   onClickAddUser() async {
     User user = User(
         first_name: fnameController.text,
         last_name: lnameController.text,
@@ -43,10 +43,12 @@ int? selectedIdRole;
     print( selectedIdRole.toString());
     print( selectedIdTeam.toString());
 
-
-    addedUser = await UserService.addUser(user);
+    addedUser=await UserService.addUser(user);
     list_of_Users.add(addedUser);
     notifyListeners();
+print('yes');
+
+
 
 
   }
@@ -55,7 +57,6 @@ int? selectedIdRole;
   onClickEditUser() async {
 print(id_user);
     User user = User(
-
         first_name: fnameController.text,
         last_name: lnameController.text,
         email: emailController.text,
@@ -64,17 +65,28 @@ print(id_user);
         role_id: selectedIdRole.toString(),
         team_id: selectedIdTeam.toString()
     );
+print( fnameController.text);
+print( lnameController.text);
+print( emailController.text);
+print(  idController.text);
+print(  passwordController.text);
+print( selectedIdRole.toString());
+print( selectedIdTeam.toString());
+
+edit_User=await UserService.editUser(user, id_user);
+for(var us in list_of_Users){
+  if(us.id == id_user){
+    us=edit_User;
+    notifyListeners();
+    //notifyListeners();
+    break;
+  }
+}
 
 
-    edit_User=await UserService.editUser(user, id_user);
-    for(var us in list_of_Users){
-      if(us.id == id_user){
-        us=edit_User;
-        notifyListeners();
-        break;
-      }
 
-    }
+
+
   }
 
 //--------------DeleteUser---------------------

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasko/my_app/constants.dart';
-import 'package:tasko/my_app/team_leader_view/attachement_controller.dart';
+import 'package:tasko/controllers/attachement_controller.dart';
 import 'package:tasko/my_models/attachement_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 

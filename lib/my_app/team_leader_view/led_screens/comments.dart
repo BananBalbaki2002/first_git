@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:comment_box/comment/comment.dart' show CommentBox;
+import 'package:provider/provider.dart';
+import 'package:tasko/my_app/comment_dec/comment_controller.dart';
+import 'package:tasko/my_app/comment_dec/comment_model.dart';
 import '../../constants.dart';
 
 class Comments extends StatefulWidget {
@@ -36,7 +39,7 @@ class _CommentsState extends State<Comments> {
     },
   ];
 
-  Widget commentChild(data) {
+  Widget commentChild(List<CommentsModel> data) {
     return ListView(
       physics:const BouncingScrollPhysics(),
       children: [
@@ -58,14 +61,29 @@ class _CommentsState extends State<Comments> {
                       borderRadius: BorderRadius.all(Radius.circular(50))),
                   child: CircleAvatar(
                       radius: 50,
-                      backgroundImage: NetworkImage(data[i]['pic'] + "$i")),
+                      backgroundImage: NetworkImage(
+                        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+
+
+                      )),
                 ),
               ),
-              title: Text(
-                data[i]['name'],
-                style: const TextStyle(fontWeight: FontWeight.bold),
+              title: Row(
+                children: [
+
+                  Text(
+                    '${data[i].first_name}',
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(width: 5,),
+                  Text(
+                    '${data[i].last_name}',
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                ],
+
               ),
-              subtitle: Text(data[i]['message']),
+              subtitle: Text('${data[i].body}'),
             ),
           )
       ],
@@ -80,38 +98,73 @@ class _CommentsState extends State<Comments> {
         backgroundColor: appCo,
         elevation: 0,
       ),
-      body: CommentBox(
-        userImage:
-        "https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400",
-        child: commentChild(filedata),
-        labelText: 'Write a comment...',
-        withBorder: false,
-        errorText: 'Comment cannot be blank',
-        sendButtonMethod: () {
-          if (formKey.currentState!.validate()) {
-            // ignore: avoid_print
-            print(commentController.text);
-            setState(() {
-              var value = {
-                'name': 'New User',
-                'pic':
-                'https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400',
-                'message': commentController.text
-              };
-              filedata.insert(0, value);
-            });
-            commentController.clear();
-            FocusScope.of(context).unfocus();
-          } else {
-            // ignore: avoid_print
-            print("Not validated");
-          }
-        },
-        formKey: formKey,
-        commentController: commentController,
-        backgroundColor: Colors.blue,
-        textColor: Colors.white,
-        sendWidget: const Icon(Icons.send_sharp, size: 30, color: Colors.white),
-      ),
+      body:
+Consumer<CommentController>(builder:(context,controller,_)=>
+    FutureBuilder< List<CommentsModel> >(
+  future:controller.fetchAllComment(),
+  builder: (context,snapShot){
+    //AsyncSnapShot
+    if(snapShot.hasData)
+      return
+
+        CommentBox(
+          userImage:
+          "https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400",
+          child: commentChild(snapShot.data!),
+          labelText: 'Write a comment...',
+          withBorder: false,
+          errorText: 'Comment cannot be blank',
+          sendButtonMethod: () {
+           // if (formKey.currentState!.validate())
+
+           if(true){
+              // ignore: avoid_print
+              print(commentController.text);
+              setState(() {
+                var value = {
+                  'name': 'New User',
+                  'pic':
+                  'https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400',
+                  'message': commentController.text
+                };
+                CommentsModel model=CommentsModel(
+                 first_name: '' ,
+                  last_name: '',
+                  user_id: 1,
+                  body:  commentController.text,
+
+                );
+                filedata.insert(0, value);
+              });
+              commentController.clear();
+              FocusScope.of(context).unfocus();
+            } else {
+              // ignore: avoid_print
+              print("Not validated");
+            }
+          },
+          formKey: formKey,
+          commentController: commentController,
+          backgroundColor: Colors.blue,
+          textColor: Colors.white,
+          sendWidget: const Icon(Icons.send_sharp, size: 30, color: Colors.white),
+        );
+
+
+
+    if(snapShot.hasError)
+      return Center(
+        child: Text(snapShot.error.toString()),
+      );
+
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  },
+))
+
+
+
+
     );
 }}

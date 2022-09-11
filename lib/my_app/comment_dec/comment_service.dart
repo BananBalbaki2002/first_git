@@ -15,7 +15,7 @@ class CommentService{
 
 
 
-  static Future fetchMyComments()async{
+  static Future MyComments()async{
 
     var response =await http.get(Uri.parse(ServerConfig.domainName+ServerConfig.showMyComments),
 
@@ -42,7 +42,7 @@ return l_myComment;
 
 
 
-  static Future fetchAllComments(int id_task)async{
+  static Future<List<CommentsModel>> AllComments(int id_task)async{
 
     var response =await http.get(Uri.parse(ServerConfig.domainName+ServerConfig.showAllComment+'${id_task}'),
 
@@ -53,26 +53,29 @@ return l_myComment;
     );
 
 
-   List<CommentsModel> data=jsonDecode(response.body);
+   var data=jsonDecode(response.body);
 CommentsModel commentsModel;
 List<CommentsModel> l_allComments=[];
-
+var l_id_users=[];
+print(data[0]['id']);
 for(int i=0;i<data.length; i++){
 
 commentsModel=CommentsModel(
-
-
-
-
+id: data[i]['id'],
+  user_id: data[i]['user_id'],
+  task_id: data[i]['task_id'],
+  first_name: data[i]['first_name'],
+  last_name: data[i]['last_name'],
+  body: data[i]['body']
 );
+l_allComments.add(commentsModel);
 
-
-
-
+l_id_users.add(data[i]['user_id']);
 
 }
 
-
+print(l_id_users);
+return l_allComments;
 
 
 

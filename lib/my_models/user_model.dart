@@ -32,9 +32,14 @@ class User{
   var role_id;
   var team_id;
   var id;
-  String? img_profile;
+ String?  img_profile;
   String? phone;
   String? teamName;
+  String? contact;
+String? education;
+String? experience;
+var user_id;
+
 
   User({
     this.first_name,
@@ -47,6 +52,8 @@ class User{
     this.id,
     this.img_profile,
     this.phone,
+    this.user_id,
+    this.contact,this.education,this.experience,
     this.teamName
   });
 

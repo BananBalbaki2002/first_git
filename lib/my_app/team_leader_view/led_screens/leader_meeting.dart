@@ -30,7 +30,7 @@ class MeetingForLeaderOm extends StatelessWidget {
 
           onPressed: () {
           // Navigator.pop(context);
-          Navigator.pushNamed(context,'/NotificationsScre');
+          Navigator.pop(context);
           },
         ),
 
